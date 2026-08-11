@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The SMR Under Military Action — Read It Through Your Lens</title>
+<style>
+  :root{
+    --ink:#1b2432; --ink-soft:#425066; --line:#e2e6ee; --bg:#f6f8fb; --card:#ffffff;
+    --navy:#1f3864; --steel:#2e5496; --accent:#2e5496;
+    --shadow:0 1px 2px rgba(20,30,50,.06), 0 6px 20px rgba(20,30,50,.06);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    line-height:1.6; -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--steel); text-decoration:none}
+  a:hover{text-decoration:underline}
+  .wrap{max-width:1040px; margin:0 auto; padding:0 24px}
+  .serif{font-family:Georgia,"Times New Roman",serif}
+
+  /* top bar */
+  header.top{position:sticky; top:0; z-index:20; background:rgba(246,248,251,.92);
+    backdrop-filter:saturate(180%) blur(8px); border-bottom:1px solid var(--line)}
+  .top-inner{display:flex; align-items:center; gap:14px; height:58px}
+  .brand{font-weight:700; color:var(--navy); letter-spacing:.2px; cursor:pointer}
+  .brand small{display:block; font-weight:500; font-size:11px; color:var(--ink-soft); letter-spacing:.3px}
+  .top-spacer{flex:1}
+  .top-link{font-size:13px; color:var(--ink-soft)}
+
+  /* hero */
+  .hero{padding:64px 0 26px}
+  .kicker{font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--steel); font-weight:700}
+  h1.title{font-size:40px; line-height:1.15; margin:14px 0 8px; color:var(--navy); font-weight:700}
+  .lede{font-size:19px; color:var(--ink-soft); max-width:760px; margin:0}
+  .premise{margin-top:20px; font-size:15px; color:var(--ink-soft); max-width:760px}
+
+  /* lens grid */
+  section.lenses{padding:14px 0 40px}
+  .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:18px}
+  @media(max-width:820px){.grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.grid{grid-template-columns:1fr}}
+  .lens-card{
+    background:var(--card); border:1px solid var(--line); border-radius:14px; padding:20px 20px 18px;
+    box-shadow:var(--shadow); cursor:pointer; transition:transform .14s ease, box-shadow .14s ease, border-color .14s;
+    border-top:3px solid var(--c); display:flex; flex-direction:column; min-height:172px;
+  }
+  .lens-card:hover{transform:translateY(-3px); box-shadow:0 10px 30px rgba(20,30,50,.10); border-color:#cfd6e4}
+  .lens-ic{font-size:26px; line-height:1}
+  .lens-name{font-weight:700; color:var(--navy); font-size:18px; margin:12px 0 2px}
+  .lens-who{font-size:13.5px; color:var(--ink-soft); flex:1}
+  .lens-go{margin-top:12px; font-size:13px; font-weight:600; color:var(--c)}
+
+  /* section intro / methodology */
+  .band{background:#fff; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+  .band .wrap{padding:36px 24px}
+  .band h2{color:var(--navy); font-size:22px; margin:0 0 10px}
+  .band p{color:var(--ink-soft); max-width:820px; margin:0 0 12px}
+  .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
+  .chip{font-size:12.5px; background:#eef2f8; color:var(--steel); border:1px solid #dde6f2; padding:5px 11px; border-radius:999px}
+
+  /* lens view */
+  .lens-hero{padding:34px 0 6px; border-bottom:1px solid var(--line)}
+  .back{font-size:13px; color:var(--ink-soft); display:inline-flex; gap:6px; align-items:center; margin-bottom:14px; cursor:pointer}
+  .lens-hero h1{font-size:30px; color:var(--navy); margin:6px 0 4px; display:flex; align-items:center; gap:12px}
+  .badge{width:12px; height:12px; border-radius:4px; background:var(--c); display:inline-block}
+  .lens-hero .who{color:var(--ink-soft); font-size:15px; margin:0}
+  .framing{font-size:16.5px; color:var(--ink); max-width:820px; margin:20px 0 6px}
+
+  /* lens switcher */
+  .switch{display:flex; flex-wrap:wrap; gap:8px; padding:18px 0 4px; position:sticky; top:58px;
+    background:linear-gradient(var(--bg),var(--bg) 70%,rgba(246,248,251,0)); z-index:10}
+  .pill{font-size:13px; padding:6px 13px; border-radius:999px; border:1px solid var(--line); background:#fff;
+    color:var(--ink-soft); cursor:pointer; transition:all .12s}
+  .pill:hover{border-color:#c7d0e0; color:var(--navy)}
+  .pill.active{background:var(--c); border-color:var(--c); color:#fff; font-weight:600}
+
+  /* reading path */
+  .path{padding:10px 0 44px}
+  .path h3{font-size:14px; letter-spacing:.5px; text-transform:uppercase; color:var(--steel); margin:22px 0 4px}
+  .path .sub{font-size:13.5px; color:var(--ink-soft); margin:0 0 16px}
+  .step{display:flex; gap:16px; background:#fff; border:1px solid var(--line); border-radius:12px;
+    padding:16px 18px; margin-bottom:12px; box-shadow:var(--shadow); border-left:3px solid var(--c)}
+  .num{flex:none; width:30px; height:30px; border-radius:8px; background:var(--c); color:#fff;
+    font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; margin-top:2px}
+  .step-body{flex:1}
+  .step-title{font-weight:700; color:var(--navy); font-size:15.5px}
+  .step-note{color:var(--ink); font-size:14.5px; margin:4px 0 0}
+  .step-desc{color:var(--ink-soft); font-size:13px; margin:6px 0 0}
+  .step-doi{font-size:12px; color:#8a94a6; margin-top:7px}
+
+  footer{background:var(--navy); color:#c8d2e6; padding:40px 0 46px; margin-top:8px}
+  footer .wrap{display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between}
+  footer h4{color:#fff; margin:0 0 8px; font-size:15px}
+  footer p, footer li{font-size:13px; color:#aeb9d0; margin:3px 0}
+  footer a{color:#dfe6f5}
+  .foot-col{max-width:420px}
+  .hide{display:none}
+  .note-inline{font-size:12.5px; color:#8a94a6}
+
+  /* long-form (built-out) lens */
+  .lens-card{position:relative}
+  .tag{position:absolute; top:13px; right:13px; font-size:10px; font-weight:700; letter-spacing:.6px;
+    text-transform:uppercase; color:#fff; background:var(--c); padding:3px 9px; border-radius:999px}
+  .article{max-width:760px; margin:6px 0 8px}
+  .article .lead{font-size:18px; line-height:1.62; color:var(--ink); margin:20px 0 22px}
+  .article h2{font-size:22px; color:var(--navy); margin:32px 0 10px; line-height:1.25}
+  .article p{font-size:16px; line-height:1.68; color:#2a3546; margin:0 0 14px}
+  .article em{font-style:italic; color:#1b2432}
+  .refs{display:flex; flex-wrap:wrap; gap:7px; margin:4px 0 6px}
+  .rchip{font-size:11.5px; background:#eef2f8; color:var(--steel); border:1px solid #dde6f2;
+    padding:3px 10px; border-radius:999px}
+  .pull{border-left:4px solid var(--c); background:#fff; box-shadow:var(--shadow);
+    border-radius:0 12px 12px 0; padding:18px 22px; margin:24px 0}
+  .pull .q{font-family:Georgia,"Times New Roman",serif; font-size:19px; color:var(--navy); line-height:1.5}
+  .pull .cite{font-size:12.5px; color:var(--ink-soft); margin-top:9px}
+  .bottom{background:#fff; border:1px solid var(--line); border-left:4px solid var(--c);
+    border-radius:12px; padding:18px 22px; margin:28px 0 6px; box-shadow:var(--shadow)}
+  .bottom h3{margin:0 0 8px; color:var(--navy); font-size:16px}
+  .bottom p{margin:0; font-size:15.5px; line-height:1.66; color:#2a3546}
+
+  /* public-forum questions */
+  .forum{background:#f4f7fb; border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin:28px 0 6px}
+  .forum h2{margin:0 0 8px}
+  .forum-intro{font-size:15.5px; line-height:1.62; color:#2a3546; margin:0 0 14px; max-width:720px}
+  .qgroup{margin:16px 0 4px}
+  .qlabel{font-size:12px; font-weight:700; letter-spacing:.6px; text-transform:uppercase; color:var(--c); margin:0 0 6px}
+  .forum ul{list-style:none; margin:0; padding:0}
+  .forum li{position:relative; padding:9px 0 9px 30px; font-size:15px; line-height:1.55; color:#2a3546; border-top:1px solid #e7edf5}
+  .forum li:first-child{border-top:none}
+  .forum li:before{content:"?"; position:absolute; left:0; top:9px; width:19px; height:19px; border-radius:50%;
+    background:var(--c); color:#fff; font-size:11px; font-weight:700; display:flex; align-items:center; justify-content:center; line-height:1}
+  .qgroup.ask li:before{content:"\2192"; font-size:12px}
+  .forum-note{margin-top:14px !important}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand" onclick="go('')">DBA-MA-SMR<small>SMR under military action · reading portal</small></div>
+    <div class="top-spacer"></div>
+    <a class="top-link" href="#about">About</a>
+  </div>
+</header>
+
+<!-- ================= HUB ================= -->
+<main id="hub">
+  <div class="wrap hero">
+    <div class="kicker">Design Basis for AI Governance in Critical Infrastructure</div>
+    <h1 class="title serif">The Small Modular Reactor, read through your lens</h1>
+    <p class="lede">One design-basis package on the near-term SMR under deliberate military action &mdash; framed six ways, for the six audiences who read it differently.</p>
+    <p class="premise">The underlying material is the same: a facility-class Design Basis (DBA-MA-SMR-FC1) and the instruments around it. What changes is where you enter and what you read first. Pick the viewpoint that fits how you read, and walk an ordered path through the same package, framed for that role.</p>
+  </div>
+
+  <section class="lenses">
+    <div class="wrap">
+      <div class="grid" id="lensGrid"></div>
+    </div>
+  </section>
+
+  <div class="band" id="about">
+    <div class="wrap">
+      <h2 class="serif">What this is</h2>
+      <p>Nuclear power has always been designed against accidents. This body of work extends the design basis to <em>deliberate military action</em> &mdash; an intentional, adaptive adversary that can do what accidents cannot: deny site access, target the infrastructure shared across a multi-module campus, and defeat the very barriers a modern reduced-consequence licensing case depends on.</p>
+      <p>The layering is simple: a <strong>Design Basis (DB)</strong> sets what a facility must withstand; the <strong>Design Basis Accident (DBA)</strong> is the accident envelope; the <strong>Military-Action extension (DBA-MA)</strong> supplements &mdash; not replaces &mdash; both, and states, as a result rather than an open worry, where the SMR&rsquo;s source-term and passive-safety arguments hold under deliberate action and where they do not.</p>
+      <div class="chips">
+        <span class="chip">Source term as the spine</span>
+        <span class="chip">Consequence-Basis Conditionality</span>
+        <span class="chip">72-hour ASSC floor</span>
+        <span class="chip">Dual design basis (physical + AI-governance)</span>
+        <span class="chip">Reduced EPZ, honestly bounded</span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ================= LENS VIEW ================= -->
+<main id="lensview" class="hide">
+  <div class="wrap lens-hero">
+    <div class="back" onclick="go('')">&larr; All lenses</div>
+    <h1 class="serif"><span class="badge" id="lvBadge"></span><span id="lvName"></span></h1>
+    <p class="who" id="lvWho"></p>
+    <p class="framing" id="lvFraming"></p>
+  </div>
+  <div class="wrap">
+    <div class="switch" id="lvSwitch"></div>
+  </div>
+  <div class="wrap">
+    <div id="lvBody"></div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-col">
+      <h4>Design Basis for AI Governance in Critical Infrastructure</h4>
+      <p>The DBA-MA nuclear series &mdash; SMR facility class. A reading portal over the assembled review package and its candidate work products.</p>
+      <p class="note-inline">Instrument links resolve to versioned Zenodo deposits (CC BY 4.0) as each is published; designators are shown here in the interim.</p>
+    </div>
+    <div class="foot-col">
+      <h4>Provenance</h4>
+      <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
+      <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.2 &middot; Environmentalist lens built out (with public-forum questions)</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ---------- shared instrument library (the same material) ---------- */
+const ITEMS = {
+  '00A':{t:"Reviewer&rsquo;s Guide &amp; Transmittal Map", d:"The start-here reading map: the three-track set and the order to read it in."},
+  '00B':{t:"NRC Cover Letter / Transmittal", d:"The formal transmittal that frames the review set for the Commission."},
+  'A1' :{t:"DBA-MA Introduction", d:"DB &rarr; DBA &rarr; DBA-MA, and the four characteristics of military action."},
+  'A2' :{t:"US L1 &mdash; Regulatory Case", d:"DBA-MA mapped onto the NRC framework and the US facility inventory."},
+  'B1' :{t:"DBA-MA-SMR-FC1 &mdash; Facility-Class Design Basis", d:"The document under review: source term, three-tier adversarial basis, 72-hour ASSC, dual design basis."},
+  'B2' :{t:"DBA-MA-ST &mdash; Source Term Under Military Action", d:"The Consequence-Basis Conditionality principle: an accident-domain relaxation does not bound deliberate action."},
+  'B3' :{t:"TB1 &mdash; Technical-Basis Supplement", d:"Ultimate-heat-sink architecture and multi-module ASSC adequacy."},
+  'B4' :{t:"DBA-MA-DiD &mdash; Defense-in-Depth", d:"Correlated-barrier adequacy: the adversary as a deliberate common-cause failure."},
+  'B5' :{t:"CB-Annex-Nuclear &mdash; Command Broker", d:"The AI-governance design basis: the Bright Line, the envelope, the lock, accountability."},
+  'C1' :{t:"DBA-MA-UC-1 &mdash; Spent Fuel Pool Thermal Progression", d:"The worked consequence chain from a loss of cooling."},
+  'C2a':{t:"DBA-UxS &mdash; Uncrewed Systems (cross-sector)", d:"The uncrewed-systems threat basis behind the nuclear annex."},
+  'C2b':{t:"DBA-MA-UxS-NA &mdash; Nuclear Annex", d:"Nuclear vulnerability profiles and passive standoff hardening."},
+  'C3b':{t:"US L3 &mdash; Trigger Framework", d:"Observable indicators and the transition to the protected state."},
+  'C3c':{t:"US L4 &mdash; Monitoring Guidance", d:"Monitoring and data-sharing; the transition to the Autonomous Safe Shutdown Condition."},
+  'C4' :{t:"DBA-MA Transition Architecture", d:"Interim implementation tiers for facilities pending full compliance."},
+  'C5a':{t:"DBA-MA-PPA &mdash; Physical Proximity Attack", d:"Control-room seizure and safety-actuation independence (the Zaporizhzhia lesson)."},
+  'C5b':{t:"Three Threads of Cyber Security", d:"The three-domain cyber assessment: systems, software, and target sets."},
+  '1A' :{t:"1A &mdash; Counter-UAS Part 73 Reframing", d:"Active counter-UAS defeat authority under the intent-agnostic Part 73 mission."},
+  '1B' :{t:"1B &mdash; Campus Cybersecurity Gap-Closure", d:"Three vehicles for the multi-module shared-I&amp;C cyber gap."},
+  '2A' :{t:"2A &mdash; Topical-Report Wrapper &amp; Conformance Matrix", d:"Applicability, pathway selection, and requirement-by-requirement conformance to 10 CFR."},
+  '2B' :{t:"2B &mdash; Requirements-Traceability Matrix", d:"Every requirement traced to the instrument that satisfies it."},
+  '2C' :{t:"2C &mdash; Anticipated RAIs / Q&amp;A", d:"Pre-answers to the questions a reviewer is most likely to ask."},
+  '3A' :{t:"3A &mdash; Reduced-EPZ Technical Basis", d:"Source term &rarr; dose &rarr; EPZ, and the conditionality of the relaxation."},
+  '3B' :{t:"3B &mdash; Formal-Methods V&amp;V", d:"When machine-learning-provenance logic may be credited on the safety path."},
+  '3C' :{t:"3C &mdash; Risk-Informed / PRA Bridge", d:"Relating the deterministic adversarial tiers to the plant PRA."},
+  '3D' :{t:"3D &mdash; Military Threat Coordination Protocol", d:"The DoD/IC &rarr; licensee warning pathway."},
+  'SITE':{t:"DBA-MA-SITE &mdash; Geopolitical Siting", d:"Optimizing site selection against geopolitical exposure and the baseload-for-grid need."}
+};
+/* short labels used for in-text reference chips */
+const REFLABEL = {
+  'B1':'DBA-MA-SMR-FC1 · §3A source term', '3A':'Reduced-EPZ Technical Basis (3A)',
+  'B2':'DBA-MA-ST · Conditionality', 'C1':'DBA-MA-UC-1 · Spent fuel'
+};
+
+/* ---------- the six lenses ---------- */
+const LENSES = [
+  { id:'nrc', name:'NRC — Regulator', ic:'⚖️', c:'#2e5496',
+    who:'The reviewer acting within the review-and-rulemaking machinery.',
+    framing:'You review within the review-and-rulemaking machinery. Enter through the Reviewer&rsquo;s Guide, work the conformance matrix requirement by requirement, and note where the package names a gap and its vehicle rather than asserting a conformance the documents do not support.',
+    path:[
+      ['00A','Start here — the reading order and what each document contributes.'],
+      ['00B','The formal transmittal and the two findings directed to the Commission.'],
+      ['B1','The artifact under review, written to topical-report standard.'],
+      ['2A','The conformance spine — every requirement mapped to 10 CFR.'],
+      ['2B','Confirms no requirement is left without a supporting instrument.'],
+      ['2C','The Requests for Additional Information you&rsquo;d otherwise issue, pre-answered.']
+    ]},
+  { id:'aoo', name:'Asset Owner-Operator', ic:'🏭', c:'#b06d12',
+    who:'The party bringing the capital and absorbing operational risk.',
+    framing:'You bring the capital and absorb the operating risk. The design basis is in part a risk-transfer instrument &mdash; regulation moves some operating risk from you to the regulator. Read for the licensing pathway, the reduced-EPZ value, the siting optimization, and the obligations you take on.',
+    path:[
+      ['B1','The pathway gate (&sect;7) and the reduced-EPZ value that makes the design basis worth carrying.'],
+      ['SITE','Optimize siting: geopolitical exposure against the baseload-for-grid-stability need.'],
+      ['C4','Interim transition tiers if you are not yet fully compliant.'],
+      ['3A','The reduced EPZ — the benefit, and the residual you carry with it.'],
+      ['2A','Which licensing pathway, and what conformance you must demonstrate.'],
+      ['1A','An owner obligation and a needed authority: counter-UAS defeat.'],
+      ['1B','An owner obligation: campus cybersecurity at multi-module scale.']
+    ]},
+  { id:'engineer', name:'Engineer', ic:'⚙️', c:'#2e7d64',
+    who:'The technical reviewer or designer checking mechanisms and adequacy proofs.',
+    framing:'You check the mechanisms and the adequacy proofs. Start with how the source term, the ASSC, and the dual design basis actually work, then follow the adequacy and verification arguments into the technical-basis supplements.',
+    path:[
+      ['B1','The spine: source term (&sect;3A), three-tier adversarial basis (&sect;4A), passive-safety adequacy (&sect;5A).'],
+      ['B3','The multi-module ASSC adequacy result, by ultimate-heat-sink architecture.'],
+      ['B4','Correlated-barrier adequacy — the adversary as a deliberate common-cause failure.'],
+      ['B5','The AI-governance half of the dual design basis.'],
+      ['C5a','Control-room seizure and safety-actuation independence.'],
+      ['C5b','The three-domain cyber assessment.'],
+      ['3B','When machine-learning-provenance logic may be credited on the safety path.'],
+      ['3C','Relating the deterministic adversarial tiers to the plant PRA.']
+    ]},
+  { id:'environment', name:'Environmentalist', ic:'🌿', c:'#3f8f3f',
+    who:'Focused on radiological consequence, the reduced EPZ, and the footprint.',
+    framing:'Your concern is radiological consequence &mdash; dose, the reduced emergency planning zone, and the spent-fuel footprint. Follow the chain from source term to dose to zone, and read the conditionality that says the reduced zone is an accident-domain result with a declared adversarial residual.',
+    path:[
+      ['B1','The source term (&sect;3A) and the dose/EPZ chain (&sect;3A.4).'],
+      ['B2','Why an accident-domain relaxation does not bound deliberate action.'],
+      ['3A','The reduced EPZ in full — including the residual and the proximity coupling.'],
+      ['C1','Spent-fuel consequence: the slower chain that is harder to arrest once underway.']
+    ],
+    deep:{
+      lead:`If you are wary of nuclear power, the reduced emergency planning zone is exactly the kind of claim that deserves a second look. A smaller zone means a plant can sit closer to where people live &mdash; so the question is fair and direct: is the smaller zone a real reduction in the hazard, or a regulatory convenience that moves the risk rather than removing it? This lens follows the reduced zone all the way down, in the design basis&rsquo;s own terms, and it does not stop at the comfortable part of the story.`,
+      sections:[
+        { h:`The chain that sets the zone`,
+          p:[`The size of an emergency planning zone is not a policy choice; it is the output of a calculation. The chain runs <em>source term &rarr; dose &rarr; zone</em>. The source term is how much radioactive material could be released and how much of it escapes the barriers meant to hold it. Carried by weather, that release produces a projected dose to people at a given distance. The zone is drawn at the distance beyond which that dose stays under the protective-action threshold &mdash; one rem in the early phase, the level at which authorities would tell people to shelter or leave.`,
+              `The near-term small modular reactor earns a smaller zone on this chain, and it earns it honestly. Its integral primary system removes the large pipe whose rupture drives a big reactor&rsquo;s worst release; its containment and, in the pool designs, the water sitting above the fuel scrub and hold back much of what could otherwise escape. Less material available, more of it retained &mdash; a lower projected dose &mdash; a zone that can shrink from the familiar ten miles toward the site boundary.`],
+          refs:['B1','3A'] },
+        { h:`Why the smaller zone is genuinely real &mdash; for accidents`,
+          p:[`For the accident case this is sound, and it is worth saying plainly rather than grudgingly. The reduced zone is not a waiver; it is a demonstration. Under the current framework &mdash; the 2023 emergency-preparedness rule written for these reactors &mdash; an applicant must <em>show</em>, across a range of weather conditions and not one favorable day, that the projected dose stays under the threshold at the proposed boundary. A design that cannot show it does not get the smaller zone. So within the world of accidents &mdash; equipment failure, operator error, natural hazards &mdash; a smaller zone reflects a genuinely smaller accident consequence.`],
+          refs:['3A'] },
+        { h:`The catch this project refuses to hide`,
+          p:[`Here is where most reduced-zone arguments stop, and where this one does not. The whole calculation is <em>conditional</em>. The low dose depends on specific barriers holding: water staying in the pool, containment staying intact, the sequence staying slow enough for the passive safety systems to do their work. Those conditions are reasonable to assume for an accident. They are not reasonable to assume against someone who is <em>trying</em> to defeat them.`,
+              `Deliberate action &mdash; military action, sabotage &mdash; can do what an accident cannot: deny access to the site for days, target the exact barrier the low dose depends on, and keep the pressure on. The design basis turns this into a standing rule it calls the Consequence-Basis Conditionality Check: any consequence relaxation must declare the barriers it credits, test each of them against what a deliberate adversary could do, and <em>state the residual</em> &mdash; the release that stays credible if those barriers are defeated on purpose. The reduced zone is an accident-domain result; its adversarial residual is written down, not assumed away.`],
+          refs:['B2','3A'],
+          pull:{ q:`The favorable source term slightly raises the consequence of its own residual: the relaxation that reduces the planned-for accident also moves people closer to the unplanned-for adversarial one.`, cite:`Reduced-EPZ Technical Basis (Work Product 3A), on the proximity coupling` } },
+        { h:`The coupling, said out loud`,
+          p:[`That is the honest core of this lens. The smaller zone is what lets a plant sit near a community &mdash; and that closeness is much of its value. But it also means the residual the accident math does not bound has a <em>nearer</em> population than a ten-mile zone would place around the plant. The project&rsquo;s answer is not to pretend the coupling away, and not to inflate the accident zone to bury it, but to carry the residual explicitly and to design the emergency-planning posture so it can scale if a deliberate event ever materializes.`] },
+        { h:`Spent fuel: the slower chain`,
+          p:[`One more consequence deserves its own mention, because it is slower and, once it starts, harder to stop. Spent fuel sits in a pool; if cooling is lost and no water is added, the pool heats, boils, and &mdash; over days rather than hours &mdash; the fuel can be uncovered. It is a less likely path than a reactor release and a more forgiving timeline, but it is the one that rewards patience from an adversary, and the worked analysis treats it that way rather than waving it off.`],
+          refs:['C1'] }
+      ],
+      bottom:`If you came in suspecting the reduced zone was a way to move risk onto nearby communities, the honest answer is: partly &mdash; and the design basis says so out loud. The smaller zone is a real reduction in <em>accident</em> consequence, earned by a genuinely smaller source term and demonstrated to a dose threshold. It also carries an <em>adversarial</em> residual the accident calculation does not bound, sharpened by the very closeness the smaller zone permits &mdash; and that residual is declared, carried as a design input, and given an escalation path rather than hidden. You do not have to take the reduced zone on faith; you can read exactly what it assumes, and exactly what it admits it does not cover.`,
+      forum:{
+        intro:`Understanding the tradeoff is half of it; the other half is holding the record to it. A reduced zone is decided in public &mdash; licensing dockets, hearings, Advisory Committee meetings, emergency-planning exercises. These are the questions worth putting on that record, and the specific commitments worth asking the regulator and the operator to make in front of the community rather than in a protected annex.`,
+        groups:[
+          { label:`Questions for the room`, items:[
+            `Was the adversarial residual &mdash; the part the reduced zone does not bound &mdash; stated here in plain language, or only in a Safeguards-protected annex the public cannot read?`,
+            `How much closer does the smaller zone let this plant sit to where we live, and what is the residual consequence at that nearer distance?`,
+            `Was the dose demonstration run across a real range of weather &mdash; including a still, inverted night with the wind toward town &mdash; or a favorable case?`,
+            `Is the zone sized on one module&rsquo;s source term, or on the whole campus inventory under a single correlated event?`,
+            `If the residual ever materializes, what actually happens to us &mdash; and is there a protective-action plan that scales to it, or only to the small accident zone?`
+          ]},
+          { label:`Ask the regulator (NRC) to`, ask:true, items:[
+            `Put the conditionality on the public record: require the reduced-EPZ residual and the proximity coupling to appear in the docket the public can read, not only in a protected annex.`,
+            `Confirm, publicly, that the dose basis uses the aggregate campus inventory and a full meteorological envelope &mdash; not one module and one favorable day.`,
+            `Make the Consequence-Basis Conditionality Check a binding, reviewable requirement, not a voluntary analytical courtesy.`,
+            `Require the emergency-planning concept of operations to carry a scalable protective-action path keyed to the adversarial residual &mdash; and require it to be exercised with the local community.`,
+            `Address the spent-fuel pool directly: is makeup credited passively, without the operator action or the power an adversary could deny?`
+          ]},
+          { label:`Ask the asset owner-operator to`, ask:true, items:[
+            `Say plainly, at the forum, what the reduced zone assumes and what residual the community is being asked to carry.`,
+            `Commit to passive, no-operator-action cooling and spent-fuel makeup, so our protection does not depend on site access an adversary can cut off.`,
+            `Fund and run joint emergency-planning exercises with the community &mdash; not tabletop compliance.`,
+            `Commit to the physical and counter-UAS hardening that actually shrinks the residual, rather than only declaring it.`,
+            `Be candid about siting: was this site chosen partly because the small zone permits closeness to load and population, and what does that mean for us?`
+          ]}
+        ],
+        note:`These questions are grounded in the reduced-EPZ basis (3A), the classification &amp; docket-handling plan (2E), and the spent-fuel use case (C1). The owner&rsquo;s hardening obligations are developed further in the Asset Owner-Operator and National Security lenses.`
+      }
+    }},
+  { id:'community', name:'Community', ic:'🏘️', c:'#7a5aa6',
+    who:'The public near a site, asking what it means locally.',
+    framing:'You live near a site, or might. The question is what a reduced emergency planning zone means where you live &mdash; how it is sized, how the site is watched, and how a protective action would be called. This lens stays in plain language and points to the technical basis if you want to go deeper.',
+    path:[
+      ['B1','What the reduced EPZ means, in the design-basis document&rsquo;s own terms (&sect;3A.4).'],
+      ['3A','Plain terms: how the zone is sized, and what it does and does not cover.'],
+      ['C3c','How a site is monitored, and how a protective posture is triggered.'],
+      ['SITE','How siting balances safety distance against where the power is needed.']
+    ]},
+  { id:'natsec', name:'National Security', ic:'🛡️', c:'#8c3b3b',
+    who:'DoD/IC and homeland-security readers concerned with deliberate action.',
+    framing:'You read for deliberate action &mdash; threat, resilience, denial, and the seams between agencies. The military-action extension treats intentional, adaptive force as a design load, names the authority and information gaps that reach beyond the NRC, and points to the vehicles that would close them.',
+    path:[
+      ['B1','The military-action extension: the adversarial basis (&sect;4A) and the state-actor layer (&sect;5).'],
+      ['C5a','Adversarial control-room seizure — the Zaporizhzhia lesson.'],
+      ['C2b','Uncrewed-system threat profiles and hardening (with the cross-sector basis, C2a).'],
+      ['B5','AI under denial: the locked envelope and hardware-reset governance.'],
+      ['1A','Counter-UAS defeat authority — the reframing and the vehicle.'],
+      ['1B','Campus cyber against a Tier-1 state actor.'],
+      ['3D','The DoD/IC &rarr; licensee warning pathway — the gap licensing cannot close alone.'],
+      ['C3b','The trigger observables that time the transition to the protected state.']
+    ]}
+];
+const LMAP = Object.fromEntries(LENSES.map(l=>[l.id,l]));
+
+/* ---------- render hub ---------- */
+function renderHub(){
+  document.getElementById('lensGrid').innerHTML = LENSES.map(l=>`
+    <div class="lens-card" style="--c:${l.c}" onclick="go('${l.id}')">
+      ${l.deep?'<div class="tag">In&nbsp;depth</div>':''}
+      <div class="lens-ic">${l.ic}</div>
+      <div class="lens-name">${l.name}</div>
+      <div class="lens-who">${l.who}</div>
+      <div class="lens-go">${l.deep?'Read the full lens':'Enter this lens'} &rarr;</div>
+    </div>`).join('');
+}
+
+/* ---------- render a lens ---------- */
+function refChips(refs){
+  if(!refs||!refs.length) return '';
+  return '<div class="refs">'+refs.map(c=>`<span class="rchip">${REFLABEL[c]||(ITEMS[c]?ITEMS[c].t:c)}</span>`).join('')+'</div>';
+}
+function renderPath(l,title){
+  const steps = l.path.map((p,i)=>{
+    const it = ITEMS[p[0]]||{t:p[0],d:''};
+    return `<div class="step" style="--c:${l.c}">
+      <div class="num">${i+1}</div>
+      <div class="step-body">
+        <div class="step-title">${it.t}</div>
+        <div class="step-note">${p[1]}</div>
+        <div class="step-desc">${it.d}</div>
+        <div class="step-doi">Full instrument &middot; Zenodo DOI to be minted</div>
+      </div></div>`;
+  }).join('');
+  return `<div class="path"><h3>${title||'Your reading path'}</h3>
+    <p class="sub">The same package, ordered for this reader. ${l.path.length} instruments &mdash; start at the top.</p>${steps}</div>`;
+}
+function renderArticle(l){
+  const d = l.deep;
+  let h = `<div class="article"><p class="lead">${d.lead}</p>`;
+  d.sections.forEach(s=>{
+    h += `<h2 class="serif">${s.h}</h2>`;
+    (s.p||[]).forEach(p=> h += `<p>${p}</p>`);
+    if(s.refs) h += refChips(s.refs);
+    if(s.pull) h += `<div class="pull"><div class="q">&ldquo;${s.pull.q}&rdquo;</div><div class="cite">&mdash; ${s.pull.cite}</div></div>`;
+  });
+  if(d.bottom) h += `<div class="bottom"><h3>The bottom line for you</h3><p>${d.bottom}</p></div>`;
+  if(d.forum) h += renderForum(d.forum);
+  h += `</div>`;
+  return h + renderPath(l,'The instruments behind this view');
+}
+function renderForum(f){
+  let h = `<div class="forum"><h2 class="serif">Take it to the public forum</h2><p class="forum-intro">${f.intro}</p>`;
+  f.groups.forEach(g=>{
+    h += `<div class="qgroup ${g.ask?'ask':''}"><div class="qlabel">${g.label}</div><ul>`
+       + g.items.map(i=>`<li>${i}</li>`).join('') + `</ul></div>`;
+  });
+  if(f.note) h += `<p class="forum-note note-inline">${f.note}</p>`;
+  return h + `</div>`;
+}
+function renderLens(id){
+  const l = LMAP[id]; if(!l){ go(''); return; }
+  document.documentElement.style.setProperty('--c', l.c);
+  document.getElementById('lvBadge').style.setProperty('--c', l.c);
+  document.getElementById('lvName').innerHTML = l.ic+' '+l.name;
+  document.getElementById('lvWho').innerHTML = l.who;
+  document.getElementById('lvFraming').innerHTML = l.framing;
+  document.getElementById('lvSwitch').innerHTML = LENSES.map(x=>`
+    <div class="pill ${x.id===id?'active':''}" style="--c:${x.c}" onclick="go('${x.id}')">${x.name.split(' —')[0].split('-')[0].trim()}</div>`).join('');
+  document.getElementById('lvBody').innerHTML = l.deep ? renderArticle(l) : renderPath(l);
+}
+
+/* ---------- tiny hash router ---------- */
+function go(id){ location.hash = id ? '#/'+id : '#'; window.scrollTo({top:0,behavior:'instant'}); route(); }
+function route(){
+  const h = location.hash.replace(/^#\/?/,'');
+  const hub = document.getElementById('hub'), lv = document.getElementById('lensview');
+  if(h && LMAP[h]){ hub.classList.add('hide'); lv.classList.remove('hide'); renderLens(h); }
+  else { lv.classList.add('hide'); hub.classList.remove('hide'); if(h==='about'){document.getElementById('about').scrollIntoView();} }
+}
+window.addEventListener('hashchange', route);
+renderHub(); route();
+</script>
+</body>
+</html>
