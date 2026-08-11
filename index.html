@@ -205,7 +205,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.0 &middot; all six lenses built out</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.1 &middot; all six lenses built out &middot; instrument DOIs minted</p>
     </div>
   </div>
 </footer>
@@ -630,16 +630,28 @@ function refChips(refs){
   if(!refs||!refs.length) return '';
   return '<div class="refs">'+refs.map(c=>`<span class="rchip">${REFLABEL[c]||(ITEMS[c]?ITEMS[c].t:c)}</span>`).join('')+'</div>';
 }
+const UMBRELLA_DOI = '10.5281/zenodo.21430410';
+const DOI = {
+  'B1':'10.5281/zenodo.21894261',
+  '3A':'10.5281/zenodo.21894508',
+  'B3':'10.5281/zenodo.21894606',
+  '3B':'10.5281/zenodo.21894692',
+  '3C':'10.5281/zenodo.21894740'
+};
 function renderPath(l,title){
   const steps = l.path.map((p,i)=>{
     const it = ITEMS[p[0]]||{t:p[0],d:''};
+    const d = DOI[p[0]];
+    const doiHtml = d
+      ? `Instrument DOI &middot; <a href="https://doi.org/${d}" target="_blank" rel="noopener">${d}</a>`
+      : `Part of the package &middot; <a href="https://doi.org/${UMBRELLA_DOI}" target="_blank" rel="noopener">${UMBRELLA_DOI}</a>`;
     return `<div class="step" style="--c:${l.c}">
       <div class="num">${i+1}</div>
       <div class="step-body">
         <div class="step-title">${it.t}</div>
         <div class="step-note">${p[1]}</div>
         <div class="step-desc">${it.d}</div>
-        <div class="step-doi">Full instrument &middot; Zenodo DOI to be minted</div>
+        <div class="step-doi">${doiHtml}</div>
       </div></div>`;
   }).join('');
   return `<div class="path"><h3>${title||'Your reading path'}</h3>
