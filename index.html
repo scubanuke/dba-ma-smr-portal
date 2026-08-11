@@ -205,7 +205,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.6 &middot; Industry, Engineer, Environmentalist, Community &amp; National Security lenses built out</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.0 &middot; all six lenses built out</p>
     </div>
   </div>
 </footer>
@@ -253,7 +253,10 @@ const REFLABEL = {
   '3D':'Threat Coordination (3D)', 'C3b':'US L3 · triggers',
   'C3c':'US L4 · monitoring',
   'B3':'TB1 · heat-sink / ASSC', 'B4':'DBA-MA-DiD · correlated barriers',
-  '3B':'Formal-Methods V&V (3B)', '3C':'PRA Bridge (3C)'
+  '3B':'Formal-Methods V&V (3B)', '3C':'PRA Bridge (3C)',
+  '00A':'Reviewer&rsquo;s Guide (00A)', '00B':'NRC Transmittal (00B)',
+  '2B':'Traceability Matrix (2B)', '2C':'Anticipated RAIs (2C)',
+  '2E':'Classification &amp; Docket Plan (2E)'
 };
 
 /* ---------- the six lenses ---------- */
@@ -268,7 +271,54 @@ const LENSES = [
       ['2A','The conformance spine — every requirement mapped to 10 CFR.'],
       ['2B','Confirms no requirement is left without a supporting instrument.'],
       ['2C','The Requests for Additional Information you&rsquo;d otherwise issue, pre-answered.']
-    ]},
+    ],
+    deep:{
+      lead:`You do not design this plant and you do not advocate for it. Your task is narrower and harder: apply an accepted review method to a submitted case and decide whether the record actually supports a finding. Two things about this package change how that goes. It is written to topical-report standard &mdash; reviewed once, referenced by many applications &mdash; so a finding here is leveraged rather than local. And it does something applicants rarely do: where the case is short of conformance, it says so and names the vehicle to close the gap, instead of asserting a conformance the documents do not support. It also carries two findings addressed to the Commission, not to the staff, because two of its issues cannot be resolved inside a licensing review at all. This lens reads the package the way you would work it.`,
+      sections:[
+        { h:`Enter through the reading order, not the middle`,
+          p:[`The set is built to be entered in sequence. The Reviewer&rsquo;s Guide (00A) is the start-here map: the three-track structure and the order each document is meant to be read in, so you are not reconstructing the applicant&rsquo;s posture from scattered assertions. The formal transmittal (00B) is the cover that frames the review set for the Commission and states the two directed findings up front rather than burying them.`,
+              `The procedural value is simple but real: the package tells you where it claims conformance and where it does not. A reviewer&rsquo;s worst case is a well-written submission that blurs the two, so that a gap surfaces only late, as an RAI you should have issued or a finding reversed on appeal. This set front-loads the distinction, which is exactly what makes it reviewable at topical-report scale.`],
+          refs:['00A','00B'] },
+        { h:`The artifact, and the standards it must answer to`,
+          p:[`What is under review is a facility-class Design Basis (DBA-MA-SMR-FC1) written to be referenced by many applications, not a single plant&rsquo;s FSAR. That raises the stakes on the record &mdash; a finding propagates to every application that cites the class &mdash; and it concentrates the review&rsquo;s value in the same measure.`,
+              `The standards in play are the ordinary ones, applied to an extraordinary threat. The General Design Criteria of 10 CFR Part 50 Appendix A &mdash; GDC 5 on sharing structures, systems, and components across a multi-module campus, GDC 21 on protection-system testability &mdash; the physical-security and cyber rules of Part 73 (73.1&rsquo;s design-basis threat, 73.54, 73.55), the chosen licensing pathway (Part 52, the now-final Part 53, or the proposed Part 57), and the endorsed methodologies behind them (RG 1.233 from the Licensing Modernization Project, RG 1.183, IEEE 603). Your question throughout is whether the case maps its claims onto these hooks honestly, or reaches past what they support.`],
+          refs:['B1','A2'] },
+        { h:`Work the conformance spine requirement by requirement`,
+          p:[`The heart of the review is the conformance matrix. The topical-report wrapper (2A) maps every requirement to its 10 CFR hook; the requirements-traceability matrix (2B) is the completeness check that confirms no requirement is left without a supporting instrument &mdash; no orphan requirements. Together they are the spine you walk.`,
+              `The discipline is not to accept a narrative claim of conformance but to follow each row to the instrument that satisfies it and confirm the instrument actually says what the matrix asserts. A matrix is a promise; the review is where the promise is tested against the underlying document. This is unglamorous and it is precisely where a reviewer earns the finding &mdash; a conformance that traces cleanly is credited, and one that does not becomes an RAI or a finding, not a courtesy pass.`],
+          refs:['2A','2B'],
+          pull:{ q:`A named gap with a stated vehicle is reviewable. An asserted conformance the documents do not support is a finding waiting to be reversed &mdash; the reviewer&rsquo;s job is to tell one from the other.`, cite:`the conformance-matrix discipline of Work Products 2A and 2B` } },
+        { h:`The RAIs, pre-answered &mdash; test them, do not accept them`,
+          p:[`The anticipated-RAI document (2C) works the roughly twenty questions across eight areas that a reviewer is most likely to issue, and answers them with the gaps stated honestly and their closure vehicles named. Handled well, this compresses the review loop: the applicant has done your first pass and shown its work.`,
+              `But a pre-answer is a claim like any other. Your job is to test whether each one holds against the record, not to accept it because it is well organized. And where a pre-answer routes a gap to a vehicle <em>outside</em> the docket &mdash; a rulemaking, an endorsement, an interagency authority &mdash; that is a signal to elevate the item, not to close it. A tidy answer that quietly depends on something no licensing review can grant is the case that most needs a reviewer&rsquo;s skepticism.`],
+          refs:['2C'] },
+        { h:`The two findings the staff cannot close`,
+          p:[`This is the procedural crux, and it is where the institution&rsquo;s role &mdash; not just the staff&rsquo;s &mdash; is engaged. Two issues sit above what a licensee can resolve in a docket and above what review can close. First, active counter-UAS defeat authority: a commercial reactor may detect an uncrewed threat but has no authority to defeat it, and that authority is a federal and legislative question &mdash; the package reframes it under the intent-agnostic Part 73 mission and points to a Section 1602-style vehicle &mdash; not a conformance the licensee can demonstrate. Second, the DoD/IC-to-licensee threat-information seam: the licensee can build the receiving end, but the sending-end authority to push a warning across it sits with agencies the NRC does not direct.`,
+              `The package directs both to the Commission as findings rather than pretending the staff can review them away. The correct reviewer posture matches: confirm the licensee has done everything on its own side of each seam, credit that, and forward the residual to the policy level. You neither close these by fiat nor hold an otherwise-sound application hostage to a gap the applicant has no power to close. Recognizing which issues belong to rulemaking and interagency coordination rather than to a safety evaluation is itself part of the review.`],
+          refs:['1A','3D'] }
+      ],
+      bottom:`This package is built to be reviewed. It enters through a reading guide, maps every requirement to a 10 CFR hook with no orphans, pre-answers the RAIs, and &mdash; most usefully to you &mdash; separates genuine conformance from a named gap with a stated vehicle rather than blurring the two. Your discipline is unchanged by any of that: follow each conformance claim to the instrument and confirm it holds; do not let a well-organized submission substitute for a supported record. And treat the two Commission-directed findings for what they are &mdash; issues that belong to rulemaking and interagency coordination, not to this review &mdash; so the application is judged on what a licensing review can actually decide.`,
+      forum:{
+        intro:`A reviewer&rsquo;s leverage is exercised through the record and the review venues &mdash; the RAI exchange, the Advisory Committee on Reactor Safeguards, the rulemaking docket, and the Commission itself. These are the determinations worth making explicit in the safety evaluation, and the items that belong above the staff level rather than inside it.`,
+        groups:[
+          { label:`Confirm on the record`, items:[
+            `Does every conformance claim in the matrix (2A) trace to an instrument that actually supports it &mdash; no orphan requirements (2B), and no asserted conformance the underlying documents do not back?`,
+            `Is the reduced-EPZ relaxation demonstrated on the aggregate campus inventory across a full meteorological envelope, and is its adversarial residual on the reviewable docket rather than only in a Safeguards annex?`,
+            `Are the correlated-barrier cutsets &mdash; the adversary as a deliberate common-cause failure &mdash; addressed, or does the defense-in-depth credit rest on independence the deliberate framing defeats?`,
+            `Is the AI-governance envelope provably bounded and the Bright Line reviewable, or is the autonomy boundary asserted rather than demonstrated?`,
+            `Is each named gap paired with a credible, correctly-routed vehicle &mdash; Reg Guide, NEI endorsement, rulemaking, or interagency authority &mdash; rather than left as a bare admission?`
+          ]},
+          { label:`Elevate above the staff review`, ask:true, items:[
+            `The counter-UAS defeat authority &mdash; a federal and legislative question (the Section 1602 reframing), not a conformance the licensee can demonstrate; forward it as a Commission-directed finding.`,
+            `The DoD/IC-to-licensee threat-information seam &mdash; the receiving end is licensing-addressable, but the sending-end authority sits outside the NRC; route it to interagency coordination, not to the docket.`,
+            `Whether the Consequence-Basis Conditionality Check and the reduced-EPZ residual should become a binding, reviewable requirement via Reg Guide or rulemaking, rather than a voluntary analytical courtesy.`,
+            `The endorsement track for the industry-side vehicles &mdash; a campus-cyber addendum to NEI 08-09 and a NEI 10-04 scoping update &mdash; so the compliance basis exists as accepted guidance before it is needed in a docket.`,
+            `The classification posture (2E): resolve the public-docket-versus-Safeguards split so the load-bearing conditionality sits on a record the affected public can actually read.`
+          ]}
+        ],
+        note:`Grounded in the Reviewer&rsquo;s Guide and transmittal (00A, 00B), the conformance and traceability matrices (2A, 2B), the anticipated RAIs (2C), and the classification &amp; docket-handling plan (2E). The adequacy proofs behind each conformance claim are developed in the Engineer lens; the adversary model and the interagency seam are developed in the National Security lens.`
+      }
+    }},
   { id:'industry', name:'Industry', ic:'🏭', c:'#b06d12',
     who:'The reactor vendors, the industry consensus bodies (NEI), and the asset owner-operator &mdash; the licensee with the capital and the skin in the game who actually builds and runs the plant.',
     framing:'Licensing is not a two-body problem between the regulator and one applicant. It is a three-way engagement &mdash; NRC &harr; industry &harr; the asset owner-operator. Industry, through the vendors and the Nuclear Energy Institute, develops the consensus guidance the NRC endorses; the asset owner-operator is the licensee who references the design, holds the license, and carries the capital and operating risk. This lens reads the package the way industry does: what it costs, what it is worth, what it obligates &mdash; and how it fits the machinery that turns industry guidance into NRC-accepted review guidance.',
