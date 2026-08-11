@@ -166,6 +166,7 @@
       <h2 class="serif">What this is</h2>
       <p>Nuclear power has always been designed against accidents. This body of work extends the design basis to <em>deliberate military action</em> &mdash; an intentional, adaptive adversary that can do what accidents cannot: deny site access, target the infrastructure shared across a multi-module campus, and defeat the very barriers a modern reduced-consequence licensing case depends on.</p>
       <p>The layering is simple: a <strong>Design Basis (DB)</strong> sets what a facility must withstand; the <strong>Design Basis Accident (DBA)</strong> is the accident envelope; the <strong>Military-Action extension (DBA-MA)</strong> supplements &mdash; not replaces &mdash; both, and states, as a result rather than an open worry, where the SMR&rsquo;s source-term and passive-safety arguments hold under deliberate action and where they do not.</p>
+      <p>Each lens is also meant to <em>inform</em>, not just to route. The goal is to give enough plain-language background &mdash; how a source term sets a dose, how a reduced planning zone is earned, how industry guidance becomes a regulator&rsquo;s rule &mdash; that anyone, whether a regulator, an investor, or a neighbor, can engage the material and reach their own judgment. The lenses that are built out open with that background before the argument.</p>
       <div class="chips">
         <span class="chip">Source term as the spine</span>
         <span class="chip">Consequence-Basis Conditionality</span>
@@ -204,7 +205,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.2 &middot; Environmentalist lens built out (with public-forum questions)</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.3 &middot; Environmentalist &amp; Industry lenses built out</p>
     </div>
   </div>
 </footer>
@@ -242,8 +243,11 @@ const ITEMS = {
 };
 /* short labels used for in-text reference chips */
 const REFLABEL = {
-  'B1':'DBA-MA-SMR-FC1 · §3A source term', '3A':'Reduced-EPZ Technical Basis (3A)',
-  'B2':'DBA-MA-ST · Conditionality', 'C1':'DBA-MA-UC-1 · Spent fuel'
+  'B1':'DBA-MA-SMR-FC1', '3A':'Reduced-EPZ Technical Basis (3A)',
+  'B2':'DBA-MA-ST · Conditionality', 'C1':'DBA-MA-UC-1 · Spent fuel',
+  'A2':'US L1 Regulatory Case', '2A':'TR wrapper / conformance (2A)',
+  'SITE':'DBA-MA-SITE · siting', 'C4':'Transition Architecture',
+  '1A':'Counter-UAS (1A)', '1B':'Campus cyber (1B)'
 };
 
 /* ---------- the six lenses ---------- */
@@ -259,18 +263,57 @@ const LENSES = [
       ['2B','Confirms no requirement is left without a supporting instrument.'],
       ['2C','The Requests for Additional Information you&rsquo;d otherwise issue, pre-answered.']
     ]},
-  { id:'aoo', name:'Asset Owner-Operator', ic:'🏭', c:'#b06d12',
-    who:'The party bringing the capital and absorbing operational risk.',
-    framing:'You bring the capital and absorb the operating risk. The design basis is in part a risk-transfer instrument &mdash; regulation moves some operating risk from you to the regulator. Read for the licensing pathway, the reduced-EPZ value, the siting optimization, and the obligations you take on.',
+  { id:'industry', name:'Industry', ic:'🏭', c:'#b06d12',
+    who:'The reactor vendors, the industry consensus bodies (NEI), and the asset owner-operator &mdash; the licensee with the capital and the skin in the game who actually builds and runs the plant.',
+    framing:'Licensing is not a two-body problem between the regulator and one applicant. It is a three-way engagement &mdash; NRC &harr; industry &harr; the asset owner-operator. Industry, through the vendors and the Nuclear Energy Institute, develops the consensus guidance the NRC endorses; the asset owner-operator is the licensee who references the design, holds the license, and carries the capital and operating risk. This lens reads the package the way industry does: what it costs, what it is worth, what it obligates &mdash; and how it fits the machinery that turns industry guidance into NRC-accepted review guidance.',
     path:[
-      ['B1','The pathway gate (&sect;7) and the reduced-EPZ value that makes the design basis worth carrying.'],
+      ['B1','The pathway gate (&sect;7) and the reduced-EPZ value that make the design basis worth carrying as an asset.'],
+      ['2A','Which pathway (Part 52 / 53 / proposed 57) and the conformance you must demonstrate &mdash; the spine of the review.'],
       ['SITE','Optimize siting: geopolitical exposure against the baseload-for-grid-stability need.'],
+      ['3A','The reduced EPZ &mdash; the value that permits siting near load, and the residual you carry with it.'],
       ['C4','Interim transition tiers if you are not yet fully compliant.'],
-      ['3A','The reduced EPZ — the benefit, and the residual you carry with it.'],
-      ['2A','Which licensing pathway, and what conformance you must demonstrate.'],
       ['1A','An owner obligation and a needed authority: counter-UAS defeat.'],
-      ['1B','An owner obligation: campus cybersecurity at multi-module scale.']
-    ]},
+      ['1B','An owner obligation, developed through NEI: campus cybersecurity at multi-module scale.']
+    ],
+    deep:{
+      lead:`A quick orientation first, because the mechanics are not obvious from the outside. Advanced-reactor licensing runs as a three-body engagement, not a duel between the regulator and one company. The Nuclear Energy Institute (NEI) and the reactor vendors develop industry-consensus guidance; the NRC reviews and <em>endorses</em> it &mdash; usually through a Regulatory Guide &mdash; which makes it an accepted method a reviewer will apply; and the asset owner-operator is the licensee who references the design, holds the license, and carries the capital and the operating risk. Reading this package as industry means seeing that triangle &mdash; and the difference between treating the design basis as a burden and treating it as an asset.`,
+      sections:[
+        { h:`How industry guidance becomes review guidance`,
+          p:[`Industry is not a lobby standing outside the process; it writes the first draft of the guidance the regulator then blesses. The mechanism is <em>endorsement</em>: NEI develops a consensus document (the numbered NEI guidance), the NRC reviews it, and if it agrees it endorses the document &mdash; typically through a Regulatory Guide &mdash; making it one acceptable way to satisfy a requirement. From that point a reviewer applies it, so an endorsed NEI document effectively becomes part of the review-guidance stack alongside the NRC&rsquo;s own standard review plans.`,
+              `The pattern is well worn. NEI 18-04, the Licensing Modernization Project&rsquo;s risk-informed, technology-inclusive methodology, was endorsed by Regulatory Guide 1.233 and became a foundation for the new 10 CFR Part 53 framework; the Advanced Reactor Content of Application Project did the same for what goes into an application; and on the two topics this package touches, NEI 08-09 (the cybersecurity plan) and NEI 10-04 (identifying assets subject to the cyber rule) are the endorsed industry guidance. When this package proposes a vehicle, it is proposing something that moves along this exact track.`],
+          refs:['A2','2A'] },
+        { h:`Why the regulation is partly on your side`,
+          p:[`For the asset owner-operator there is a counterintuitive truth worth stating plainly: a clear, endorsed regulatory framework is a risk-transfer instrument that works in your favor. It moves a share of operating risk from you to the regulator, and it de-risks a first-of-a-kind investment by making the rules of the game explicit and reviewable in advance. A design basis written to topical-report standard &mdash; reviewed once and referenced by many applications &mdash; turns a per-plant cost into a one-time industry investment. Regulation you helped shape, and can build to, is cheaper than uncertainty.`],
+          refs:['B1','2A'],
+          pull:{ q:`A design basis reviewed once and referable turns a per-plant cost into a one-time industry investment &mdash; and an endorsed framework is the cheapest risk transfer a first-of-a-kind project can buy.`, cite:`the topical-report logic of Work Product 2A` } },
+        { h:`The pathway and the value`,
+          p:[`Where the money is: the licensing pathway is selected by the source-term risk profile, not by megawatts &mdash; Part 52 is the established route, Part 53 is now a final optional framework, and a proposed Part 57 targets the low-consequence end. The reduced emergency planning zone is the value that lets you site near load and population, and the siting instrument helps you optimize geopolitical exposure against the baseload-for-grid-stability need. This is the part of the package that changes the business case.`],
+          refs:['B1','2A','3A','SITE'] },
+        { h:`What it obligates you to do &mdash; and why those are industry actions too`,
+          p:[`The design basis also names obligations, and the honest read is that they double as collective industry work. Two reach beyond a single applicant: active counter-UAS defeat authority, which the package reframes under the intent-agnostic Part 73 mission, and campus cybersecurity at multi-module scale. The cyber closure in particular routes straight through the endorsement machinery &mdash; a campus-scale addendum to NEI 08-09 and a NEI 10-04 scoping update that industry develops and the NRC endorses. So your compliance basis is, in part, a working-group output you help write. The interim transition architecture covers you while that guidance matures.`],
+          refs:['1A','1B','C4'] },
+        { h:`Where the military-action layer sits on industry&rsquo;s roadmap`,
+          p:[`One candid point about timing. NEI&rsquo;s current heavy lifting is accident-domain modernization: the Licensing Modernization Project, the content-of-application methodology, Part 53 implementation, emergency-planning modernization, and the cyber guidance. The military-action extension &mdash; the deliberate, adaptive threat this whole package is built around &mdash; is <em>not</em> yet an NEI product. That is an open lane, not a closed door: the industry side of these findings, the campus-cyber addendum above all, is exactly the kind of thing an NEI working group produces and the NRC endorses. Getting ahead of it, as a working-group position, is cheaper than being caught by it in a docket or a hearing.`],
+          refs:['1B'] }
+      ],
+      bottom:`For the licensee with skin in the game, the design basis is an asset, not just a hurdle. It is written to topical-report standard so it can be reviewed once and referenced by many applications; it earns the reduced-EPZ value that makes siting near load viable; and where it names a gap, it names an industry-shaped vehicle to close it rather than leaving you exposed. Regulation you help build through NEI, and the NRC endorses, is the cheapest risk transfer available to a first-of-a-kind investment &mdash; which is the whole reason the industry-side vehicles in this package are worth developing before someone else forces the question.`,
+      forum:{
+        intro:`Because the engagement is a triangle, the actions split by who holds the pen. Some are the industry&rsquo;s, developed through NEI and endorsed by the NRC; others are yours as the licensee, in your application. Both are how a named gap becomes a compliance basis you can actually build to.`,
+        groups:[
+          { label:`Develop through NEI (consensus guidance → NRC endorsement)`, ask:true, items:[
+            `A campus-scale cybersecurity addendum to NEI 08-09 for the multi-module shared digital I&amp;C, and a NEI 10-04 update that makes the shared critical digital asset a first-class object.`,
+            `An emergency-planning position that carries the reduced-EPZ conditionality and the adversarial residual, aligned with NEI&rsquo;s population/siting modernization work.`,
+            `A working-group treatment of the military-action extension as a supplemental design-basis layer, so an industry position exists before a reviewer or a legislator forces one.`
+          ]},
+          { label:`Carry in your application (as the licensee)`, ask:true, items:[
+            `Select the pathway by source-term risk profile (Part 52 / 53 / proposed 57), not by megawatts, and reference the class design basis rather than re-deriving it.`,
+            `Site to optimize geopolitical exposure against the baseload-for-grid need, and carry the reduced-EPZ demonstration on the aggregate campus inventory.`,
+            `Commit to the passive-safety and hardening measures &mdash; counter-UAS standoff, campus cyber &mdash; that actually shrink the residual, and hold the cleared-decision-maker capability for the threat-warning pathway.`
+          ]}
+        ],
+        note:`Grounded in the conformance framework (2A), the reduced-EPZ basis (3A), and the counter-UAS and campus-cyber vehicles (1A, 1B). The NEI &rarr; NRC endorsement mechanism is how NEI 18-04 became RG 1.233 and a foundation for Part 53.`
+      }
+    }},
   { id:'engineer', name:'Engineer', ic:'⚙️', c:'#2e7d64',
     who:'The technical reviewer or designer checking mechanisms and adequacy proofs.',
     framing:'You check the mechanisms and the adequacy proofs. Start with how the source term, the ASSC, and the dual design basis actually work, then follow the adequacy and verification arguments into the technical-basis supplements.',
