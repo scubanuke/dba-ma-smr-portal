@@ -205,7 +205,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.5 &middot; Environmentalist, Industry, National Security &amp; Community lenses built out</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.6 &middot; Industry, Engineer, Environmentalist, Community &amp; National Security lenses built out</p>
     </div>
   </div>
 </footer>
@@ -251,7 +251,9 @@ const REFLABEL = {
   'B5':'CB-Annex · Command Broker', 'C5a':'DBA-MA-PPA · seizure',
   'C2a':'DBA-UxS', 'C2b':'DBA-MA-UxS-NA', 'C5b':'Three Threads · cyber',
   '3D':'Threat Coordination (3D)', 'C3b':'US L3 · triggers',
-  'C3c':'US L4 · monitoring'
+  'C3c':'US L4 · monitoring',
+  'B3':'TB1 · heat-sink / ASSC', 'B4':'DBA-MA-DiD · correlated barriers',
+  '3B':'Formal-Methods V&V (3B)', '3C':'PRA Bridge (3C)'
 };
 
 /* ---------- the six lenses ---------- */
@@ -330,7 +332,70 @@ const LENSES = [
       ['C5b','The three-domain cyber assessment.'],
       ['3B','When machine-learning-provenance logic may be credited on the safety path.'],
       ['3C','Relating the deterministic adversarial tiers to the plant PRA.']
-    ]},
+    ],
+    deep:{
+      lead:`Your question is not whether the design is safe in spirit; it is whether each credited function has a demonstrated margin against the demand placed on it. What makes this package different from an ordinary adequacy review is the demand side. You are not sizing against a random failure or a design-basis accident. You are sizing against a deliberate adversary who picks the single barrier worth defeating, denies you the operators and the off-site help you would normally credit, and keeps the pressure on. And you are checking <em>two</em> design bases at once &mdash; the physical, thermal-hydraulic one that ends in a source term, and the AI-governance one that bounds what an automated function is allowed to do when the site is cut off. This lens walks the mechanisms in the order you would actually check them.`,
+      sections:[
+        { h:`The spine: source term, adversarial tiers, passive adequacy`,
+          p:[`Everything rests on three arguments in the facility-class basis, and each is checkable on its own terms. The <em>source term</em> (&sect;3A) is derived from an integral primary system with no large-bore pipe to rupture, with credited retention fractions from containment and, in the pool designs, the water above the fuel. The <em>three-tier adversarial basis</em> (&sect;4A) structures the demand: the Part&nbsp;73 design-basis-threat world at the base, and a state-actor layer postulated <em>above</em> it &mdash; not a probability, a postulate. The <em>passive-safety adequacy</em> argument (&sect;5A) is the claim that the credited cooling function needs no operator action and no AC power for a defined window.`,
+              `Your checks write themselves. Are the retention fractions defensible under the full meteorological envelope and the aggregate campus inventory, not one module on a favorable day? Is the tier structure a genuine bounding argument, or a relabeling of the same DBT with a sterner adjective? And most sharply: does the passive window actually cover the <em>denial duration</em> &mdash; the number of days the adversary can hold you off the site &mdash; or does it cover the 72-hour FLEX floor and quietly assume relief arrives?`],
+          refs:['B1'] },
+        { h:`ASSC adequacy is architecture-specific`,
+          p:[`The Autonomous Safe Shutdown Condition is the plant reaching and <em>holding</em> a safe state with no off-site help for the denial window. The adequacy result is not a single number; it is set by the ultimate-heat-sink architecture, which is why the technical-basis supplement carries it by heat-sink type. A pool that holds a fixed inventory, an air-cooled sink that rejects a fixed power &mdash; each gives a different credible hold time, and each has a cliff edge when the sink is exhausted.`,
+              `The check that matters here is aggregation. The 72-hour figure is a floor borrowed from a single-unit FLEX posture; the campus is not a single unit. On a multi-module site the ASSC has to hold across the aggregate decay-heat demand, and the coping duration the design basis actually credits is longer &mdash; keyed to how long a site&rsquo;s families and crews can be denied. Size the heat sink to one module and you have proved the wrong problem. Size it to the campus under denial, and show where the cliff edge sits, and you have proved the right one.`],
+          refs:['B3'] },
+        { h:`The adversary as a deliberate common-cause failure`,
+          p:[`This is the check most likely to expose illusory margin. A conventional defense-in-depth argument leans on redundant, diverse trains whose failures are treated as largely independent. A deliberate adversary makes them <em>correlated</em>: he does not roll dice against each train, he finds the one cutset &mdash; a shared support system, a shared bay, a single act &mdash; that takes redundant barriers down together. The design basis treats the adversary explicitly as a deliberate common-cause failure and asks the defense-in-depth to survive that framing.`,
+              `So the reviewer&rsquo;s job is to hunt correlated-barrier cutsets: where does credited redundancy share a room, a power feed, a cable spreading area, a cooling loop, an access path? Diversity on the one-line diagram is not diversity if a single deliberate act reaches all of it. Where the design closes those cutsets, the DiD credit is real; where it does not, the credit is on paper.`],
+          refs:['B4'] },
+        { h:`The second design basis: governing the autonomy`,
+          p:[`The AI-governance half is a design basis in its own right, and it is checkable like one. The Command Broker governs what an automated or AI-assisted function is <em>permitted</em> to do, most stringently under denial and degraded communications. Its two load-bearing mechanisms are a locked deterministic envelope &mdash; under denial the function cannot be argued, drifted, or spoofed outside a pre-proved bound &mdash; and an independent hardware reset path that does not run through whatever may be compromised.`,
+              `The Bright Line is the reserved term for that autonomy boundary: the line an automated function may not cross on its own authority. Your checks are ordinary engineering questions asked of an unusual object. Is the envelope <em>provably</em> bounded, or merely tested? Is the reset independent of the path it is meant to recover? And does the Broker&rsquo;s arbitration fail to a safe default when it cannot resolve, rather than to whatever the last valid command said?`],
+          refs:['B5'],
+          pull:{ q:`Adequacy here is not &lsquo;the function works.&rsquo; It is that the credited function holds when the operators, the AC power, and the off-site relief are all assumed gone &mdash; and the adversary chose which barrier to take first.`, cite:`the passive-safety and ASSC adequacy argument (B1 &sect;5A, TB1)` } },
+        { h:`Seizure and actuation independence`,
+          p:[`Take the sharpest physical case: the adversary holds the control room. The Zaporizhzhia experience makes this concrete rather than hypothetical. The safety claim that has to survive it is that reactor-protection and engineered-safety actuation fire on plant conditions <em>independently</em> of the seized human-machine interface &mdash; that a held control room cannot inhibit a trip or an actuation that the process variables demand. Combine that with the AI-under-denial locked envelope and the hardware reset, and the safe state does not depend on the humans in the room being free or friendly.`,
+              `The check is true independence of the protection channels from the operable HMI: not a software interlock that a seized console can defeat, but a separation that holds when the console is in hostile hands.`],
+          refs:['C5a'] },
+        { h:`Cyber that blinds rather than defeats`,
+          p:[`Cyber action, on this design, is not credited with defeating passive safety &mdash; physics is not hackable. Its danger is that it can <em>blind</em> and mislead the campus: corrupt instrumentation, spoof displays, break the coordination among modules. The three-domain assessment separates systems, software, and target sets so each can be argued on its own.`,
+              `The reviewer&rsquo;s deep check is independence of the safety case from the digital layer: does any credited action secretly depend on a display telling the truth? If an operator or an automated function needs a truthful indication to do the right thing, then a spoof, not a rupture, is the initiating event &mdash; and the passive claim was never as digital-independent as advertised.`],
+          refs:['C5b'] },
+        { h:`Crediting learned logic: the conjunctive V&amp;V gate`,
+          p:[`The formal-methods qualification methodology answers a question the safety path will eventually face: when, if ever, may a function with machine-learning provenance be credited? The answer is a conjunctive admissibility gate &mdash; <em>all</em> of: the artifact is frozen; the credible input domain is bounded; proof is supplied where formal methods scale, with bounded coverage or an explicit exclusion where they do not; and a runtime-envelope closure catches the rest. Miss one and the function is not admissible, no matter how good the other three look.`,
+              `The honest posture worth checking against: no near-term <em>credited</em> safety action in this package actually uses machine learning. The methodology is prospective &mdash; it exists so that if learned logic is ever proposed on the safety path, the gate is already built. Your check is that the gate stays conjunctive under pressure, and that the frozen artifact in the proof is the one actually fielded, not a cleaner sibling.`],
+          refs:['3B'] },
+        { h:`Relating the tiers to the PRA &mdash; without laundering them`,
+          p:[`Finally, the bridge to the probabilistic case, because the reviewer will be asked how the deterministic postulate relates to the plant PRA. The answer refuses the easy move: deliberate intent has no defensible initiator frequency, so you cannot fold the adversary in as a probabilized initiator and report a blended risk number &mdash; that would launder a deterministic threat into a small probability and dilute it away. Instead the package borrows PRA&rsquo;s <em>conditional</em> consequence machinery: given the postulated event, what is the plant response and the release? The adversary appears as the deliberate common-cause failure of the correlated cutset; the tiers become conditioning variables; the result enters the Part&nbsp;53 case as a defense-in-depth and margin principle, not as a risk metric.`,
+              `The check is that what you are shown is a conditional consequence &mdash; CDF and LERF <em>given</em> the postulate &mdash; and not a frequency-weighted aggregate that makes the state-actor case disappear into the noise floor.`],
+          refs:['3C'] }
+      ],
+      bottom:`The reason this package is worth your time is that it is checkable. Each credited function is stated with its demand (the adversarial tier), its margin (the passive window, the heat-sink inventory, the locked envelope, the independent actuation), and its verification vehicle (3B for any learned logic, 3C for the relationship to the PRA). Where a margin is not yet demonstrated, the documents name the gap and its closure vehicle rather than asserting an adequacy the analysis does not support &mdash; which is exactly the discipline a reviewer wants to see. Your highest-value work is at two seams: whether the correlated-barrier cutsets are genuinely closed, and whether the passive/ASSC window truly covers the denial duration on the <em>aggregate</em> campus rather than a single module&rsquo;s 72-hour floor.`,
+      forum:{
+        intro:`Adequacy is not settled in a document; it is settled in the technical record &mdash; the RAI exchange, the Advisory Committee on Reactor Safeguards, the code and standards committees, and the V&amp;V qualification review. These are the adequacy questions worth pressing on that record, and the specific demonstrations worth requiring of the designer before a function is credited.`,
+        groups:[
+          { label:`Adequacy questions worth pressing`, items:[
+            `Are the correlated-barrier cutsets genuinely closed &mdash; no shared support system, bay, power feed, or access path defeating redundant trains with a single deliberate act?`,
+            `Is the ultimate-heat-sink inventory sized to the aggregate campus decay-heat demand under denial, and where exactly is the cliff edge when the sink is exhausted?`,
+            `Does the passive/ASSC window meet or exceed the credited denial duration &mdash; not merely the 72-hour FLEX floor?`,
+            `Is the AI-under-denial envelope provably bounded rather than only tested, and is the hardware reset independent of the path it recovers?`,
+            `Does any credited safety action depend on a truthful display &mdash; i.e., does the passive case actually survive loss or spoofing of the digital I&amp;C?`,
+            `Is the machine-learning admissibility gate strictly conjunctive, and is the frozen artifact in the proof the one actually fielded?`,
+            `Is the PRA relationship presented as a conditional consequence given the postulate, or as a frequency-weighted number that dilutes the deterministic case?`
+          ]},
+          { label:`Ask the designer to demonstrate`, ask:true, items:[
+            `The aggregate-campus heat-sink inventory against the credited coping duration &mdash; not a single-module 72-hour case &mdash; with the cliff edge identified.`,
+            `An explicit correlated-barrier cutset analysis: shared supports, shared spaces, and single acts that reach redundant trains.`,
+            `A bound proof for the AI-under-denial deterministic envelope, plus an independent hardware-reset path that does not traverse the compromised channel.`,
+            `Reactor-protection and engineered-safety actuation independence from a seized control room &mdash; separation, not a defeatable software interlock.`,
+            `That no credited action relies on a display being truthful &mdash; digital-independence of the passive safety case, argued domain by domain.`,
+            `A frozen-artifact V&amp;V package satisfying all four gate conditions before any machine-learning-provenance function is credited on the safety path.`,
+            `The conditional consequence result with the tiers as conditioning variables &mdash; the deterministic postulate carried through, not probabilized away.`
+          ]}
+        ],
+        note:`These checks are grounded in the facility-class spine (B1 &sect;&sect;3A/4A/5A), the heat-sink and defense-in-depth supplements (B3, B4), the Command Broker annex (B5), the seizure and cyber assessments (C5a, C5b), and the two verification methodologies (3B, 3C). The adversary model these functions are sized against is developed in the National Security lens; the review method that judges the adequacy is developed in the NRC lens.`
+      }
+    }},
   { id:'environment', name:'Environmentalist', ic:'🌿', c:'#3f8f3f',
     who:'Focused on radiological consequence, the reduced EPZ, and the footprint.',
     framing:'Your concern is radiological consequence &mdash; dose, the reduced emergency planning zone, and the spent-fuel footprint. Follow the chain from source term to dose to zone, and read the conditionality that says the reduced zone is an accident-domain result with a declared adversarial residual.',
