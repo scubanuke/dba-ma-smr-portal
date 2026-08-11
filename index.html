@@ -205,7 +205,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.4 &middot; Environmentalist, Industry &amp; National Security lenses built out</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.5 &middot; Environmentalist, Industry, National Security &amp; Community lenses built out</p>
     </div>
   </div>
 </footer>
@@ -250,7 +250,8 @@ const REFLABEL = {
   '1A':'Counter-UAS (1A)', '1B':'Campus cyber (1B)',
   'B5':'CB-Annex · Command Broker', 'C5a':'DBA-MA-PPA · seizure',
   'C2a':'DBA-UxS', 'C2b':'DBA-MA-UxS-NA', 'C5b':'Three Threads · cyber',
-  '3D':'Threat Coordination (3D)', 'C3b':'US L3 · triggers'
+  '3D':'Threat Coordination (3D)', 'C3b':'US L3 · triggers',
+  'C3c':'US L4 · monitoring'
 };
 
 /* ---------- the six lenses ---------- */
@@ -397,7 +398,47 @@ const LENSES = [
       ['3A','Plain terms: how the zone is sized, and what it does and does not cover.'],
       ['C3c','How a site is monitored, and how a protective posture is triggered.'],
       ['SITE','How siting balances safety distance against where the power is needed.']
-    ]},
+    ],
+    deep:{
+      lead:`Plain language first, because you should not need a physics degree to weigh what is being built near you. A nuclear plant is designed to contain an accident, not just to run. The newer, smaller reactors &mdash; small modular reactors, or SMRs &mdash; start with less radioactive material and are built to keep more of it inside if something goes wrong. That is the reason the &ldquo;emergency planning zone&rdquo; around one of these can be drawn smaller than the ten-mile ring you may associate with older plants. A smaller zone deserves plain scrutiny, and the good news is that the design basis behind this one is unusually willing to say what it does &mdash; and does not &mdash; cover. This lens walks through it in everyday terms and shows you what to ask.`,
+      sections:[
+        { h:`What an &ldquo;emergency planning zone&rdquo; actually is`,
+          p:[`An emergency planning zone is not a danger line or a fence &mdash; it is the area around a plant where officials work out, ahead of time, how they would protect people if there were ever a release: who would be told to stay inside, who might be asked to leave, where the potassium-iodide tablets would come from, how the roads would move. For the large reactors most people picture, that planning area has been about ten miles across. It is a <em>planning</em> radius, sized to the worst release the plant is designed around.`],
+          refs:['B1'] },
+        { h:`Why this one can be smaller &mdash; and why that is not a trick`,
+          p:[`The smaller zone is earned by a smaller hazard, not waived. Because an SMR starts with less radioactive material and keeps more of it contained, the dose a person would receive drops below the level at which officials would act much closer to the plant. And the company cannot simply claim the smaller zone &mdash; regulators require it to <em>prove</em>, across a range of weather, that the projected dose stays under that threshold at the edge of the proposed zone. If it cannot prove it, it does not get the smaller zone. So a smaller planning area reflects a genuinely smaller expected accident.`],
+          refs:['B1','3A'] },
+        { h:`The honest part you deserve to hear`,
+          p:[`Here is the part most plans leave out, and this one does not. That smaller zone is calculated for <em>accidents</em> &mdash; equipment breaking, storms, mistakes. This work asks a harder question too: what if someone attacked the plant on purpose? A deliberate attacker can do things an accident cannot, and can defeat the very protections the small-zone calculation counts on. The designers wrote that remaining risk down instead of hiding it &mdash; and they were honest about an uncomfortable point: a smaller zone is exactly what lets a plant sit closer to town, which puts people nearer to that rare, deliberate case. You are entitled to have that said plainly, and to see the emergency plan take it into account.`],
+          refs:['3A'],
+          pull:{ q:`You do not have to take the smaller zone on faith. You are entitled to ask exactly what it assumes &mdash; and what it admits it does not cover.`, cite:`the reduced-EPZ technical basis, in plain terms` } },
+        { h:`How you would know, and what you would be told to do`,
+          p:[`If something did go wrong, the plant would not simply hope you noticed. It is watched continuously, and there are defined conditions that would move it into a protected &ldquo;safe shutdown&rdquo; state before matters escalated. If a protective action were ever needed, officials would tell you what to do &mdash; shelter in place, or evacuate &mdash; through the local alert system. The plan that governs all of this should be <em>exercised</em> with your community, not just written and filed. Asking to see it, and to take part in the drill, is a fair and normal thing to do.`],
+          refs:['C3c'] },
+        { h:`Why a plant near us at all`,
+          p:[`Plants are built where the power is needed and where the grid needs steady, around-the-clock generation to stay stable &mdash; and the smaller zone is part of what makes siting one near a community possible. That is a real benefit: reliable electricity, and often jobs and a tax base. It is also a real tradeoff: closeness. Siting is a choice with honest reasons on both sides, and you are entitled to hear them laid out rather than assumed.`],
+          refs:['SITE'] }
+      ],
+      bottom:`In plain terms: the smaller planning zone reflects a genuinely smaller expected accident &mdash; that part is real engineering, not a shortcut. But you deserve more than the accident story. You deserve a straight account of what a deliberate attack could add, an emergency plan that can scale and that you help exercise, and an honest reason for why the plant sits where it does. This design basis is written to give those answers rather than to talk past you &mdash; and the questions below are how you hold anyone, the company or the regulator, to them.`,
+      forum:{
+        intro:`You do not need technical language to ask the questions that matter. These are worth putting to the company and the officials, out loud and on the record.`,
+        groups:[
+          { label:`Questions worth asking`, items:[
+            `In plain terms, how big is the planning zone here, and what exactly would I be asked to do if there were a release?`,
+            `The smaller zone is calculated for accidents &mdash; has anyone told us plainly what a <em>deliberate</em> attack could add, and how the plan covers it?`,
+            `Was the safety calculation done for bad weather, and for the whole site &mdash; all the reactor modules together &mdash; not one unit on a good day?`,
+            `How would I actually find out in an emergency, and does everyone get the same alert at the same time?`,
+            `Why is the plant proposed <em>here</em> specifically, and what does that closeness mean for us?`
+          ]},
+          { label:`Ask to see — and to be part of`, ask:true, items:[
+            `The emergency plan in plain language, and a seat at the drill that tests it &mdash; not just a document on file.`,
+            `The monitoring and alert setup, and a clear answer on who decides to call a protective action.`,
+            `Independent voices at the table &mdash; your own experts, and the engineer&rsquo;s and environmentalist&rsquo;s view of the same plant &mdash; so you are not relying on the company alone.`
+          ]}
+        ],
+        note:`Want the numbers behind the plain-language answers? The Environmentalist lens follows the dose-to-zone chain in detail, and the reduced-EPZ technical basis (3A) is the full treatment.`
+      }
+    }},
   { id:'natsec', name:'National Security', ic:'🛡️', c:'#8c3b3b',
     who:'DoD/IC and homeland-security readers concerned with deliberate action.',
     framing:'You read for deliberate action &mdash; threat, resilience, denial, and the seams between agencies. The military-action extension treats intentional, adaptive force as a design load, names the authority and information gaps that reach beyond the NRC, and points to the vehicles that would close them.',
