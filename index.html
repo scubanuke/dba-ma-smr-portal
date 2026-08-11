@@ -205,7 +205,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.3 &middot; Environmentalist &amp; Industry lenses built out</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v0.4 &middot; Environmentalist, Industry &amp; National Security lenses built out</p>
     </div>
   </div>
 </footer>
@@ -247,7 +247,10 @@ const REFLABEL = {
   'B2':'DBA-MA-ST · Conditionality', 'C1':'DBA-MA-UC-1 · Spent fuel',
   'A2':'US L1 Regulatory Case', '2A':'TR wrapper / conformance (2A)',
   'SITE':'DBA-MA-SITE · siting', 'C4':'Transition Architecture',
-  '1A':'Counter-UAS (1A)', '1B':'Campus cyber (1B)'
+  '1A':'Counter-UAS (1A)', '1B':'Campus cyber (1B)',
+  'B5':'CB-Annex · Command Broker', 'C5a':'DBA-MA-PPA · seizure',
+  'C2a':'DBA-UxS', 'C2b':'DBA-MA-UxS-NA', 'C5b':'Three Threads · cyber',
+  '3D':'Threat Coordination (3D)', 'C3b':'US L3 · triggers'
 };
 
 /* ---------- the six lenses ---------- */
@@ -407,7 +410,50 @@ const LENSES = [
       ['1B','Campus cyber against a Tier-1 state actor.'],
       ['3D','The DoD/IC &rarr; licensee warning pathway — the gap licensing cannot close alone.'],
       ['C3b','The trigger observables that time the transition to the protected state.']
-    ]}
+    ],
+    deep:{
+      lead:`A short orientation, because this framing is not the one this community usually meets. A nuclear plant&rsquo;s design basis was built against accidents &mdash; random equipment failures, operator error, natural hazards &mdash; not against an adversary who chooses, adapts, and is willing to spend time. The Design Basis Accident &mdash; Military-Action extension (DBA-MA) treats deliberate action as a design load in its own right. It cannot borrow the tools of probabilistic risk, because intention has no honest frequency; instead it postulates the attack and asks what the plant does. Four properties separate a deliberate adversary from an accident &mdash; intentionality, persistence, precision, and denial &mdash; and they are the spine of everything below. One more thing going in: the hardest gaps this creates do not live inside the NRC. They live in your lane.`,
+      sections:[
+        { h:`Why the design basis had to change`,
+          p:[`The physical-protection design-basis threat under 10 CFR Part 73 already covers sub-state and terrorist adversaries; that world is intent-agnostic, and the licensee defends it. What it does not contemplate is a state actor conducting an act of war &mdash; force applied with intelligence, at scale, over time. The military-action extension sits as a layer <em>above</em> the Part 73 threat: it supplements, it does not replace, the accident basis and the physical-protection basis. The licensee still designs to the design-basis threat; the military-action layer informs the design, the trigger observables, and the coordination &mdash; it does not ask a licensee to defeat a national military. That boundary is deliberate, and the package keeps it.`],
+          refs:['B1'] },
+        { h:`Denial is the sharpest weapon`,
+          p:[`The instinct this community brings is the correct one: the adversary&rsquo;s most effective tool against a modern reactor is not a larger warhead, it is <em>denial</em> &mdash; denying site access for the days a passive safety system needs, cutting resupply, and sustaining pressure past the margins the design credits. The answer the package engineers is the Autonomous Safe Shutdown Condition (ASSC): a state the plant can reach and hold using only on-site resources &mdash; no off-site power, no external communications, no site access &mdash; for a design-basis duration floored at 72 hours and governed above that by the family-specific coping duration on the whole multi-module campus. Persistence and denial are exactly what set that duration; where deliberate action outlasts it, the residual is declared rather than assumed away.`],
+          refs:['B1'] },
+        { h:`The seizure case`,
+          p:[`Zaporizhzhia moved control-room seizure from the hypothetical to the observed: an adversary can occupy the facility and its controls. The package&rsquo;s answer is safety-actuation independence &mdash; reactor-protection-system independence, control-rod-insertion assurance, and autonomous safety-system initiation &mdash; so the plant reaches and holds safe shutdown even from a captured control layer. On the digital side the same logic governs artificial intelligence under denial: a locked, pre-authorized deterministic envelope executes for the duration, and no command path &mdash; a coerced operator, a compromised system, an adversary at the console &mdash; can move it until a qualified human restores authority through a hardware reset.`],
+          refs:['C5a','B5'] },
+        { h:`Uncrewed systems, and the authority you don&rsquo;t have`,
+          p:[`Uncrewed systems &mdash; air, surface, and undersea &mdash; are the modality this community recognizes fastest, and the one with the sharpest legal seam. The threat basis is developed in full: vulnerability profiles, the cumulative-degradation model of repeated precision strikes, and passive standoff hardening available under existing authority. But there is a gap the licensee cannot close on its own &mdash; it may lawfully <em>detect</em> an inbound platform and may not lawfully <em>defeat</em> it. Active counter-UAS authority is federal and today reaches designated federal facilities, not commercial reactors. The package reframes that authority under the intent-agnostic Part 73 sabotage-prevention mission and names the vehicle: extend the Section 1602-style detect-and-defeat authority to licensed power reactors. The same platform may be defeated over a federal site and not over the reactor whose release would be graver &mdash; an asymmetry with no basis in the harm.`],
+          refs:['C2b','1A'] },
+        { h:`The cyber front against a Tier-1 state actor`,
+          p:[`The bounding event in the package is not a lone strike; it is a cyber-kinetic campaign &mdash; a Tier-1 state actor pre-positioned for months in the campus&rsquo;s shared digital instrumentation-and-control, timing a coordinated action to a grid-stress window and pairing it with a physical strike. The honest engineering point is that a cyber compromise does not, by itself, defeat the credited passive safety function; reactor trip and passive actuation are engineered independent of the digital layer. What it defeats is the campus&rsquo;s ability to see and coordinate &mdash; monitoring, alarms, and historian data corrupted across every module at once, as the enabling first move. Closing it is industry-and-NRC work (a campus-scale cyber addendum), but the state-actor calibration of the threat is the regulator&rsquo;s to set &mdash; and it is the piece most in your wheelhouse to inform.`],
+          refs:['C5b','1B'] },
+        { h:`The seam only you can close`,
+          p:[`Everything above is design and authority the nuclear enterprise can, in principle, build. The last gap is different, and it is squarely yours. The value of the Autonomous Safe Shutdown Condition depends on entering it <em>before</em> the attack &mdash; which requires knowing the attack is coming. The information that would tell an operator to transition &mdash; force positioning, targeting indications, engagement status &mdash; lives in classified channels in the Department of Defense and the Intelligence Community, with no established, exercised, real-time pathway to a plant control room.`,
+              `The contrast the package draws is with a hurricane: the National Hurricane Center pushes a forecast that reaches the operator, the grid, and the public at once, in an actionable form, through redundant channels. There is no equivalent for military threat. The proposal is a standing, exercised, <em>tearline</em> pathway &mdash; enough decision-relevant indication to justify and time the transition, not the raw intelligence &mdash; built on a FAST-Act Section 61003 model but on the nuclear-safety axis. Licensing cannot create it; only the interagency can.`],
+          refs:['3D','C3b'],
+          pull:{ q:`The agencies with the authority to act may lack the information that tells them to act; the agencies that hold the information lack the authority to direct the decision.`, cite:`the DoD/IC information-pathway gap (US L1 Regulatory Case §5.3; Work Product 3D)` } }
+      ],
+      bottom:`For the national-security reader, the DBA-MA extension is the first nuclear design basis that treats a reactor as the target of deliberate, adaptive action rather than the unlucky victim of an accident. The design side &mdash; denial-tolerant shutdown, seizure independence, uncrewed-system hardening, cyber-kinetic bounding &mdash; is well developed. The gaps that remain reach into your authorities: active counter-UAS defeat, the state-actor cyber calibration, and above all the warning pathway. The package does not pretend those are the NRC&rsquo;s to close; it names them as interagency work and hands you a worked description to start from.`,
+      forum:{
+        intro:`Because these gaps span jurisdictions, the actions divide by who actually holds the authority. Some are the regulator&rsquo;s; the ones that matter most to this community are not.`,
+        groups:[
+          { label:`Raise with the NRC`, ask:true, items:[
+            `Recognize the state-actor military-action layer above the Part 73 design-basis threat, and make the Consequence-Basis Conditionality Check a binding, reviewable requirement.`,
+            `Calibrate the cyber threat basis to a Tier-1 state actor&rsquo;s persistent pre-positioning &mdash; the part of the campus-cyber gap that is the regulator&rsquo;s, not industry&rsquo;s.`,
+            `Require the licensee to hold a cleared decision-maker and an exercised ASSC-transition capability, wired to the trigger framework.`
+          ]},
+          { label:`Build in the interagency (DoD / DHS / DOE)`, ask:true, items:[
+            `Stand up the DoD/IC &rarr; licensee warning pathway &mdash; a standing, exercised, tearline channel on a FAST-Act Section 61003 model &mdash; so the operator can transition ahead of an attack.`,
+            `Extend the Section 1602 counter-UAS detect-and-defeat authority to licensed commercial power reactors, exercised within the Part 73 framework with FAA deconfliction.`,
+            `Establish the cross-domain coordination the decision actually needs &mdash; nuclear safety (NRC), grid reliability (DOE/NERC), and military situational awareness (DoD/IC) &mdash; which no single existing authority connects.`
+          ]}
+        ],
+        note:`Grounded in the adversarial design basis and ASSC (B1 §4A/§5A), the seizure and AI-under-denial governance (DBA-MA-PPA, CB-Annex), the uncrewed-systems basis (DBA-UxS / UxS-NA), and the counter-UAS, campus-cyber, and threat-coordination vehicles (1A, 1B, 3D).`
+      }
+    }
+  }
 ];
 const LMAP = Object.fromEntries(LENSES.map(l=>[l.id,l]));
 
