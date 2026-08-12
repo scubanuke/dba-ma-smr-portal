@@ -110,9 +110,10 @@
   .article h2{font-size:22px; color:var(--navy); margin:32px 0 10px; line-height:1.25}
   .article p{font-size:16px; line-height:1.68; color:#2a3546; margin:0 0 14px}
   .article em{font-style:italic; color:#1b2432}
-  .refs{display:flex; flex-wrap:wrap; gap:7px; margin:4px 0 6px}
-  .rchip{font-size:11.5px; background:#eef2f8; color:var(--steel); border:1px solid #dde6f2;
-    padding:3px 10px; border-radius:999px}
+  .refs{margin:6px 0 12px; font-size:13px; line-height:1.55}
+  .refs-lead{color:var(--steel); font-weight:600}
+  .refs-titles{color:#3a4a5f}
+  .refs-see{font-size:12px; color:#8493a3; font-style:italic; margin-top:1px}
   .pull{border-left:4px solid var(--c); background:#fff; box-shadow:var(--shadow);
     border-radius:0 12px 12px 0; padding:18px 22px; margin:24px 0}
   .pull .q{font-family:Georgia,"Times New Roman",serif; font-size:19px; color:var(--navy); line-height:1.5}
@@ -205,7 +206,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.3 &middot; all six lenses built out &middot; instrument DOIs minted</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.4 &middot; all six lenses built out &middot; instrument DOIs minted</p>
     </div>
   </div>
 </footer>
@@ -632,7 +633,8 @@ function renderHub(){
 /* ---------- render a lens ---------- */
 function refChips(refs){
   if(!refs||!refs.length) return '';
-  return '<div class="refs">'+refs.map(c=>`<span class="rchip">${REFLABEL[c]||(ITEMS[c]?ITEMS[c].t:c)}</span>`).join('')+'</div>';
+  const titles = refs.map(c=>REFLABEL[c]||(ITEMS[c]?ITEMS[c].t:c)).join(', ');
+  return `<div class="refs"><span class="refs-lead">References used &mdash;</span> <span class="refs-titles">${titles}</span><div class="refs-see">See these instruments in full below.</div></div>`;
 }
 const UMBRELLA_DOI = '10.5281/zenodo.21430410';
 const DOI = {
