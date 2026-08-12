@@ -60,7 +60,11 @@
   .band h2{color:var(--navy); font-size:22px; margin:0 0 10px}
   .band p{color:var(--ink-soft); max-width:820px; margin:0 0 12px}
   .chips{display:flex; flex-wrap:wrap; gap:8px; margin-top:6px}
-  .chip{font-size:12.5px; background:#eef2f8; color:var(--steel); border:1px solid #dde6f2; padding:5px 11px; border-radius:999px}
+  .chip{font-family:inherit; font-size:12.5px; background:#eef2f8; color:var(--steel); border:1px solid #dde6f2; padding:5px 11px; border-radius:999px; cursor:pointer; transition:background .12s,border-color .12s,color .12s}
+  .chip:hover{background:#e2eaf6; border-color:#c7d6ea}
+  .chip.on{background:var(--steel); color:#fff; border-color:var(--steel)}
+  .chiphint{font-size:11.5px; color:#8493a3; margin-top:7px; font-style:italic}
+  .chipdef{margin-top:11px; font-size:13.5px; line-height:1.55; color:#39485c; background:#f6f8fc; border:1px solid #e3eaf4; border-left:3px solid var(--steel); border-radius:6px; padding:10px 13px}
 
   /* lens view */
   .lens-hero{padding:34px 0 6px; border-bottom:1px solid var(--line)}
@@ -83,14 +87,18 @@
   .path h3{font-size:14px; letter-spacing:.5px; text-transform:uppercase; color:var(--steel); margin:22px 0 4px}
   .path .sub{font-size:13.5px; color:var(--ink-soft); margin:0 0 16px}
   .step{display:flex; gap:16px; background:#fff; border:1px solid var(--line); border-radius:12px;
-    padding:16px 18px; margin-bottom:12px; box-shadow:var(--shadow); border-left:3px solid var(--c)}
+    padding:16px 18px; margin-bottom:12px; box-shadow:var(--shadow); border-left:3px solid var(--c);
+    text-decoration:none; color:inherit; cursor:pointer; transition:box-shadow .13s, border-color .13s, transform .13s}
+  .step:hover{box-shadow:0 5px 18px rgba(20,40,80,.14); border-color:#c7d6ea; transform:translateY(-1px)}
+  .step:hover .step-doi{color:var(--steel)}
   .num{flex:none; width:30px; height:30px; border-radius:8px; background:var(--c); color:#fff;
     font-weight:700; font-size:14px; display:flex; align-items:center; justify-content:center; margin-top:2px}
   .step-body{flex:1}
   .step-title{font-weight:700; color:var(--navy); font-size:15.5px}
   .step-note{color:var(--ink); font-size:14.5px; margin:4px 0 0}
   .step-desc{color:var(--ink-soft); font-size:13px; margin:6px 0 0}
-  .step-doi{font-size:12px; color:#8a94a6; margin-top:7px}
+  .step-doi{font-size:12px; color:#6b7789; margin-top:7px}
+  .step-doi .doiv{color:var(--steel); font-weight:600; white-space:nowrap}
 
   footer{background:var(--navy); color:#c8d2e6; padding:40px 0 46px; margin-top:8px}
   footer .wrap{display:flex; flex-wrap:wrap; gap:24px; justify-content:space-between}
@@ -169,12 +177,14 @@
       <p>The layering is simple: a <strong>Design Basis (DB)</strong> sets what a facility must withstand; the <strong>Design Basis Accident (DBA)</strong> is the accident envelope; the <strong>Military-Action extension (DBA-MA)</strong> supplements &mdash; not replaces &mdash; both, and states, as a result rather than an open worry, where the SMR&rsquo;s source-term and passive-safety arguments hold under deliberate action and where they do not.</p>
       <p>Each lens is also meant to <em>inform</em>, not just to route. The goal is to give enough plain-language background &mdash; how a source term sets a dose, how a reduced planning zone is earned, how industry guidance becomes a regulator&rsquo;s rule &mdash; that anyone, whether a regulator, an investor, or a neighbor, can engage the material and reach their own judgment. The lenses that are built out open with that background before the argument.</p>
       <div class="chips">
-        <span class="chip">Source term as the spine</span>
-        <span class="chip">Consequence-Basis Conditionality</span>
-        <span class="chip">72-hour ASSC floor</span>
-        <span class="chip">Dual design basis (physical + AI-governance)</span>
-        <span class="chip">Reduced EPZ, honestly bounded</span>
+        <button type="button" class="chip" data-def="The source term is how much radioactive material could be released, and how much of it escapes the barriers meant to hold it in. Almost everything downstream &mdash; the projected dose, the size of the planning zone, the consequence of an attack &mdash; is computed from it, so it runs through the whole package as its spine.">Source term as the spine</button>
+        <button type="button" class="chip" data-def="A standing rule: any relaxation justified by lower consequences must name the barriers it credits, test each against what a deliberate adversary could do, and declare the residual that remains if those barriers are defeated on purpose. It keeps an accident-domain benefit honest about the deliberate-action case.">Consequence-Basis Conditionality</button>
+        <button type="button" class="chip" data-def="The Autonomous Safe Shutdown Condition is the safe state the plant must reach and hold with no outside help. Seventy-two hours is the borrowed single-unit floor for how long it must hold unaided; on a multi-module campus under access denial, the credited coping duration runs longer.">72-hour ASSC floor</button>
+        <button type="button" class="chip" data-def="The work carries two design bases at once: the physical, thermal-hydraulic one that ends in a source term, and an AI-governance one that bounds what an automated function may do &mdash; most strictly under denial &mdash; through the Command Broker and its locked envelope.">Dual design basis (physical + AI-governance)</button>
+        <button type="button" class="chip" data-def="The emergency planning zone can be smaller because the source term is smaller &mdash; a real reduction for accidents, demonstrated to a dose threshold. &lsquo;Honestly bounded&rsquo; means the package also declares the adversarial residual the accident math does not cover, instead of hiding it.">Reduced EPZ, honestly bounded</button>
       </div>
+      <p class="chiphint">Tap a term for a plain-language definition.</p>
+      <div id="chipDef" class="chipdef" hidden></div>
     </div>
   </div>
 </main>
@@ -206,7 +216,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.4 &middot; all six lenses built out &middot; instrument DOIs minted</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.6 &middot; all six lenses built out &middot; instrument DOIs minted</p>
     </div>
   </div>
 </footer>
@@ -649,17 +659,18 @@ function renderPath(l,title){
   const steps = l.path.map((p,i)=>{
     const it = ITEMS[p[0]]||{t:p[0],d:''};
     const d = DOI[p[0]];
-    const doiHtml = d
-      ? `Instrument DOI &middot; <a href="https://doi.org/${d}" target="_blank" rel="noopener">${d}</a>`
-      : `Part of the package &middot; <a href="https://doi.org/${UMBRELLA_DOI}" target="_blank" rel="noopener">${UMBRELLA_DOI}</a>`;
-    return `<div class="step" style="--c:${l.c}">
+    const href = d ? `https://doi.org/${d}` : `https://doi.org/${UMBRELLA_DOI}`;
+    const doiLabel = d
+      ? `Instrument DOI &middot; <span class="doiv">${d} &#8599;</span>`
+      : `Part of the package &middot; <span class="doiv">${UMBRELLA_DOI} &#8599;</span>`;
+    return `<a class="step" href="${href}" target="_blank" rel="noopener" style="--c:${l.c}">
       <div class="num">${i+1}</div>
       <div class="step-body">
         <div class="step-title">${it.t}</div>
         <div class="step-note">${p[1]}</div>
         <div class="step-desc">${it.d}</div>
-        <div class="step-doi">${doiHtml}</div>
-      </div></div>`;
+        <div class="step-doi">${doiLabel}</div>
+      </div></a>`;
   }).join('');
   return `<div class="path"><h3>${title||'Your reading path'}</h3>
     <p class="sub">The same package, ordered for this reader. ${l.path.length} instruments &mdash; start at the top.</p>${steps}</div>`;
@@ -709,6 +720,20 @@ function route(){
 }
 window.addEventListener('hashchange', route);
 renderHub(); route();
+(function(){
+  var chips = document.querySelectorAll('.chips .chip[data-def]');
+  var panel = document.getElementById('chipDef');
+  var hint = document.querySelector('.chiphint');
+  if(!panel) return;
+  var cur = null;
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      if(cur===c){ cur=null; c.classList.remove('on'); panel.hidden=true; panel.innerHTML=''; if(hint) hint.style.display=''; return; }
+      chips.forEach(function(x){ x.classList.remove('on'); });
+      cur=c; c.classList.add('on'); panel.innerHTML=c.getAttribute('data-def'); panel.hidden=false; if(hint) hint.style.display='none';
+    });
+  });
+})();
 </script>
 </body>
 </html>
