@@ -242,7 +242,7 @@
       <h4>Provenance</h4>
       <p>Eclectic Technologies &middot; Timothy E. Roxey</p>
       <p>Concept DOI (all versions): <a href="https://doi.org/10.5281/zenodo.21430410">10.5281/zenodo.21430410</a></p>
-      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.6 &middot; all six lenses built out &middot; instrument DOIs minted</p>
+      <p>Licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> &middot; Portal v1.7 &middot; all six lenses built out &middot; instrument DOIs minted</p>
     </div>
   </div>
 </footer>
@@ -268,7 +268,7 @@ const ITEMS = {
   'C5a':{t:"DBA-MA-PPA &mdash; Physical Proximity Attack", d:"Control-room seizure and safety-actuation independence (the Zaporizhzhia lesson)."},
   'C5b':{t:"Three Threads of Cyber Security", d:"The three-domain cyber assessment: systems, software, and target sets."},
   '1A' :{t:"1A &mdash; Counter-UAS Part 73 Reframing", d:"Active counter-UAS defeat authority under the intent-agnostic Part 73 mission."},
-  '1B' :{t:"1B &mdash; Campus Cybersecurity Gap-Closure", d:"Three vehicles for the multi-module shared-I&amp;C cyber gap."},
+  '1B' :{t:"1B &mdash; Campus Cybersecurity Gap-Closure", d:"Three vehicles for the shared-I&amp;C asset across modules: a gradation for an asset that reaches many modules, and existing screens run at campus scale."},
   '2A' :{t:"2A &mdash; Topical-Report Wrapper &amp; Conformance Matrix", d:"Applicability, pathway selection, and requirement-by-requirement conformance to 10 CFR."},
   '2B' :{t:"2B &mdash; Requirements-Traceability Matrix", d:"Every requirement traced to the instrument that satisfies it."},
   '2C' :{t:"2C &mdash; Anticipated RAIs / Q&amp;A", d:"Pre-answers to the questions a reviewer is most likely to ask."},
@@ -349,7 +349,7 @@ const LENSES = [
             `The counter-UAS defeat authority &mdash; a federal and legislative question (the Section 1602 reframing), not a conformance the licensee can demonstrate; forward it as a Commission-directed finding.`,
             `The DoD/IC-to-licensee threat-information seam &mdash; the receiving end is licensing-addressable, but the sending-end authority sits outside the NRC; route it to interagency coordination, not to the docket.`,
             `Whether the Consequence-Basis Conditionality Check and the reduced-EPZ residual should become a binding, reviewable requirement via Reg Guide or rulemaking, rather than a voluntary analytical courtesy.`,
-            `The endorsement track for the industry-side vehicles &mdash; a campus-cyber addendum to NEI 08-09 and a NEI 10-04 scoping update &mdash; so the compliance basis exists as accepted guidance before it is needed in a docket.`,
+            `The endorsement track for the industry-side vehicles &mdash; a campus-cyber addendum to NEI 08-09 and a NEI 10-04 gradation for the campus-scale asset &mdash; so the compliance basis exists as accepted guidance before it is needed in a docket.`,
             `The classification posture (2E): resolve the public-docket-versus-Safeguards split so the load-bearing conditionality sits on a record the affected public can actually read.`
           ]}
         ],
@@ -383,7 +383,7 @@ const LENSES = [
           p:[`Where the money is: the licensing pathway is selected by the source-term risk profile, not by megawatts &mdash; Part 52 is the established route, Part 53 is now a final optional framework, and a proposed Part 57 targets the low-consequence end. The reduced emergency planning zone is the value that lets you site near load and population, and the siting instrument helps you optimize geopolitical exposure against the baseload-for-grid-stability need. This is the part of the package that changes the business case.`],
           refs:['B1','2A','3A','SITE'] },
         { h:`What it obligates you to do &mdash; and why those are industry actions too`,
-          p:[`The design basis also names obligations, and the honest read is that they double as collective industry work. Two reach beyond a single applicant: active counter-UAS defeat authority, which the package reframes under the intent-agnostic Part 73 mission, and campus cybersecurity at multi-module scale. The cyber closure in particular routes straight through the endorsement machinery &mdash; a campus-scale addendum to NEI 08-09 and a NEI 10-04 scoping update that industry develops and the NRC endorses. So your compliance basis is, in part, a working-group output you help write. The interim transition architecture covers you while that guidance matures.`],
+          p:[`The design basis also names obligations, and the honest read is that they double as collective industry work. Two reach beyond a single applicant: active counter-UAS defeat authority, which the package reframes under the intent-agnostic Part 73 mission, and campus cybersecurity at multi-module scale. The cyber closure in particular routes straight through the endorsement machinery &mdash; a campus-scale addendum to NEI 08-09 and a NEI 10-04 gradation for an asset that reaches many modules, which industry develops and the NRC endorses. The scoping method already reaches the campus asset; what it lacks is a gradation, and the ask is put that way so it cannot be answered with &ldquo;the existing rule already covers it.&rdquo; So your compliance basis is, in part, a working-group output you help write. The interim transition architecture covers you while that guidance matures.`],
           refs:['1A','1B','C4'] },
         { h:`Where the military-action layer sits on industry&rsquo;s roadmap`,
           p:[`One candid point about timing. NEI&rsquo;s current heavy lifting is accident-domain modernization: the Licensing Modernization Project, the content-of-application methodology, Part 53 implementation, emergency-planning modernization, and the cyber guidance. The military-action extension &mdash; the deliberate, adaptive threat this whole package is built around &mdash; is <em>not</em> yet an NEI product. That is an open lane, not a closed door: the industry side of these findings, the campus-cyber addendum above all, is exactly the kind of thing an NEI working group produces and the NRC endorses. Getting ahead of it, as a working-group position, is cheaper than being caught by it in a docket or a hearing.`],
@@ -394,7 +394,7 @@ const LENSES = [
         intro:`Because the engagement is a triangle, the actions split by who holds the pen. Some are the industry&rsquo;s, developed through NEI and endorsed by the NRC; others are yours as the licensee, in your application. Both are how a named gap becomes a compliance basis you can actually build to.`,
         groups:[
           { label:`Develop through NEI (consensus guidance → NRC endorsement)`, ask:true, items:[
-            `A campus-scale cybersecurity addendum to NEI 08-09 for the multi-module shared digital I&amp;C, and a NEI 10-04 update that makes the shared critical digital asset a first-class object.`,
+            `A campus-scale cybersecurity addendum to NEI 08-09 for the multi-module shared digital I&amp;C, and a NEI 10-04 update that grades the shared critical digital asset by how many modules it reaches and states what each grade requires. The scoping method already reaches that asset; what it lacks is the gradation, and its existing important-to-safety screen needs only to be run at campus scale.`,
             `An emergency-planning position that carries the reduced-EPZ conditionality and the adversarial residual, aligned with NEI&rsquo;s population/siting modernization work.`,
             `A working-group treatment of the military-action extension as a supplemental design-basis layer, so an industry position exists before a reviewer or a legislator forces one.`
           ]},
